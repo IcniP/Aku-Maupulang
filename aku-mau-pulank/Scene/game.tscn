@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dts0jcqklilx"]
+
+[ext_resource type="PackedScene" uid="uid://bj41tt4yyxh3" path="res://Scene/player.tscn" id="1_mhtsl"]
+
+[node name="Game" type="Node2D" unique_id=177279887]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1178943462]
+
+[node name="Y-Sort" type="Node2D" parent="." unique_id=828212831]
+
+[node name="Walls&Object" type="TileMapLayer" parent="Y-Sort" unique_id=1919612644]
+
+[node name="Player" parent="Y-Sort" unique_id=1086605078 instance=ExtResource("1_mhtsl")]
+is_player_controlled = true
+
+[node name="Camera2D" type="Camera2D" parent="Y-Sort/Player" unique_id=2068659889]
+zoom = Vector2(3, 3)

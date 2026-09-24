@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dlplb3jae8aj7"]
+
+[ext_resource type="Script" uid="uid://d13qgeqtsmc64" path="res://Code/interacting.gd" id="1_sqt71"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 12.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_sqt71"]
+
+[node name="interacting" type="Node2D" unique_id=746502744]
+script = ExtResource("1_sqt71")
+
+[node name="interactrange" type="Area2D" parent="." unique_id=1043138364]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactrange" unique_id=1101278661]
+shape = SubResource("CircleShape2D_xrivr")
+
+[node name="Label" type="Label" parent="interactrange" unique_id=1887536676]
+offset_left = -17.0
+offset_top = -33.0
+offset_right = 18.0
+offset_bottom = -10.0
+text = "Talk"
+label_settings = SubResource("LabelSettings_sqt71")
+
+[connection signal="area_entered" from="interactrange" to="." method="_on_interactrange_area_entered"]
+[connection signal="area_exited" from="interactrange" to="." method="_on_interactrange_area_exited"]
