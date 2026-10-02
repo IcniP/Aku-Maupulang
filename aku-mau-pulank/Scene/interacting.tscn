@@ -6,6 +6,7 @@
 radius = 12.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_sqt71"]
+font_size = 6
 
 [node name="interacting" type="Node2D" unique_id=746502744]
 script = ExtResource("1_sqt71")
@@ -19,10 +20,10 @@ shape = SubResource("CircleShape2D_xrivr")
 
 [node name="Label" type="Label" parent="interactrange" unique_id=1887536676]
 offset_left = -17.0
-offset_top = -33.0
+offset_top = -20.0
 offset_right = 18.0
-offset_bottom = -10.0
-text = "Talk"
+offset_bottom = -11.0
+text = "P"
 label_settings = SubResource("LabelSettings_sqt71")
 
 [connection signal="area_entered" from="interactrange" to="." method="_on_interactrange_area_entered"]

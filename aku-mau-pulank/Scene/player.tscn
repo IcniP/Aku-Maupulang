@@ -290,6 +290,7 @@ radius = 3.0
 height = 12.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1086605078 node_paths=PackedStringArray("animated_sprite")]
+y_sort_enabled = true
 script = ExtResource("1_xa75v")
 animated_sprite = NodePath("AnimatedSprite2D")
 
