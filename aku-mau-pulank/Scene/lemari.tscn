@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://csmuo6f04kxsg"]
+
+[ext_resource type="Script" uid="uid://0c7vnj6wflkk" path="res://Code/lemari.gd" id="1_8pu1v"]
+[ext_resource type="Texture2D" uid="uid://ccmbmtie5amxw" path="res://Assets/Map/object.png" id="1_kn8yd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmdta"]
+atlas = ExtResource("1_kn8yd")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwtco"]
+atlas = ExtResource("1_kn8yd")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmdta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmdta")
+}],
+"loop": 1,
+"name": &"Isi",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwtco")
+}],
+"loop": 1,
+"name": &"Kosong",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdoq1"]
+size = Vector2(16, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kn8yd"]
+size = Vector2(14, 12)
+
+[node name="Lemari" type="Node2D" unique_id=1408417720]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1340403604]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_kmdta")
+animation = &"Isi"
+
+[node name="Interacting" type="Area2D" parent="." unique_id=868158795]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_8pu1v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interacting" unique_id=1750913647]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_kdoq1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=380946051]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=951814920]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kn8yd")

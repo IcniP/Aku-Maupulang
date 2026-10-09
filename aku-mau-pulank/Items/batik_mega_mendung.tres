@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://buy1e5ar7uiy"]
+
+[ext_resource type="Script" uid="uid://dfgdp738qmigp" path="res://Code/ItemData.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cvaye8flqoblo" path="res://Assets/Items/batik_mega_mendung_icon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://blylrnq6asoc7" path="res://Assets/Items/batik_mega_mendung.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = &"batik_mega_mendung"
+display_name = "Batik Mega Mendung"
+icon = ExtResource("2")
+large_image = ExtResource("3")
+description = "Motif awan bergelombang khas Cirebon, Jawa Barat."
+hint = "Carilah batik bermotif awan bergelombang dari Cirebon."
