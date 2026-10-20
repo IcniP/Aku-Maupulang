@@ -173,13 +173,13 @@ zoom = Vector2(3, 3)
 
 [node name="Meja" parent="Y-Sort" unique_id=290489574 instance=ExtResource("5_ihreq")]
 y_sort_enabled = true
-position = Vector2(-57, -4)
+position = Vector2(0, -38)
 
 [node name="Lemari" parent="Y-Sort" unique_id=1408417720 instance=ExtResource("6_thj8p")]
-position = Vector2(-140, -21)
+position = Vector2(-176, -90)
 
 [node name="Lemari2" parent="Y-Sort" unique_id=1259080248 instance=ExtResource("6_thj8p")]
-position = Vector2(-116, -21)
+position = Vector2(-152, -90)
 
 [node name="Lemari3" parent="Y-Sort" unique_id=1692806489 instance=ExtResource("6_thj8p")]
-position = Vector2(-92, -21)
+position = Vector2(-127, -90)

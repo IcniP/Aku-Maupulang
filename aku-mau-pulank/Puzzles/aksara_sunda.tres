@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AksaraPuzzle" format=3]
+
+[ext_resource type="Script" path="res://Code/AksaraPuzzle.gd" id="1"]
+[ext_resource type="Script" path="res://Code/StoryBoard.gd" id="2"]
+
+[sub_resource type="Resource" id="board1"]
+script = ExtResource("2")
+title = "Kisah Kuda"
+words = PackedStringArray("ᮊᮥᮓ", "ᮃᮚ", "ᮓᮤ", "ᮞᮝᮂ")
+meanings = PackedStringArray("kuda", "ada", "di", "sawah")
+translation = "Kuda ada di sawah."
+
+[sub_resource type="Resource" id="board2"]
+script = ExtResource("2")
+title = "Kisah Sapi"
+words = PackedStringArray("ᮞᮕᮤ", "ᮓᮠᮁ", "ᮏᮥᮊᮥᮒ᮪")
+meanings = PackedStringArray("sapi", "makan", "rumput")
+translation = "Sapi makan rumput."
+
+[sub_resource type="Resource" id="board3"]
+script = ExtResource("2")
+title = "Kisah Bapa"
+words = PackedStringArray("ᮘᮕ", "ᮊ", "ᮕᮞᮁ")
+meanings = PackedStringArray("bapak", "ke", "pasar")
+translation = "Bapak ke pasar."
+
+[sub_resource type="Resource" id="board4"]
+script = ExtResource("2")
+title = "Kisah Imah"
+words = PackedStringArray("ᮞᮠ", "ᮃᮚ", "ᮓᮤ", "ᮄᮙᮂ")
+meanings = PackedStringArray("siapa", "ada", "di", "rumah")
+translation = "Siapa ada di rumah?"
+
+[resource]
+script = ExtResource("1")
+script_name = "Aksara Sunda"
+font_path = "res://Assets/Fonts/NotoSansSundanese.ttf"
+boards = [SubResource("board1"), SubResource("board2"), SubResource("board3"), SubResource("board4")]
+question_words = PackedStringArray("ᮞᮠ", "ᮓᮠᮁ", "ᮏᮥᮊᮥᮒ᮪")
+answers = PackedStringArray("sapi")

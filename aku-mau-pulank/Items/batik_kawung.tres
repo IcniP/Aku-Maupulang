@@ -1,14 +1,16 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://beebjveucw45m"]
 
 [ext_resource type="Script" uid="uid://dfgdp738qmigp" path="res://Code/ItemData.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dssrtmadt5j2v" path="res://Assets/Items/batik_kawung_icon.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://xjv02sy30ae1" path="res://Assets/Items/batik_kawung.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://d3foj3yx5emyk" path="res://Assets/Items/Kawung.png" id="1_2k257"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f2nq"]
+atlas = ExtResource("1_2k257")
 
 [resource]
 script = ExtResource("1")
 id = &"batik_kawung"
 display_name = "Batik Kawung"
-icon = ExtResource("2")
-large_image = ExtResource("3")
+icon = SubResource("AtlasTexture_2f2nq")
+large_image = ExtResource("1_2k257")
 description = "Motif lingkaran berulang menyerupai buah kolang-kaling, khas Jawa."
 hint = "Carilah batik bermotif lingkaran berulang yang menyerupai buah kolang-kaling."

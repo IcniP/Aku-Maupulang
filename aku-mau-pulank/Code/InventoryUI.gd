@@ -133,7 +133,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_3: Inventory.select(2)
 			KEY_I:
 				if panel.visible: close()
-				else: open_backpack()
+				elif not get_tree().paused: open_backpack()  # jangan buka saat panel lain terbuka
 
 func open_backpack(t = null) -> void:
 	table = t

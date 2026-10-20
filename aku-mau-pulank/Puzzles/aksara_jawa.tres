@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AksaraPuzzle" format=3]
+
+[ext_resource type="Script" path="res://Code/AksaraPuzzle.gd" id="1"]
+[ext_resource type="Script" path="res://Code/StoryBoard.gd" id="2"]
+
+[sub_resource type="Resource" id="board1"]
+script = ExtResource("2")
+title = "Kisah Kebo"
+words = PackedStringArray("ꦏꦼꦧꦺꦴ", "ꦄꦤ", "ꦆꦁ", "ꦱꦮꦃ")
+meanings = PackedStringArray("kerbau", "ada", "di", "sawah")
+translation = "Kerbau ada di sawah."
+
+[sub_resource type="Resource" id="board2"]
+script = ExtResource("2")
+title = "Kisah Sapi"
+words = PackedStringArray("ꦱꦥꦶ", "ꦩꦔꦤ꧀", "ꦱꦸꦏꦼꦠ꧀")
+meanings = PackedStringArray("sapi", "makan", "rumput")
+translation = "Sapi makan rumput."
+
+[sub_resource type="Resource" id="board3"]
+script = ExtResource("2")
+title = "Kisah Bapak"
+words = PackedStringArray("ꦧꦥꦏ꧀", "ꦩꦼꦚꦁ", "ꦥꦱꦂ")
+meanings = PackedStringArray("bapak", "pergi ke", "pasar")
+translation = "Bapak pergi ke pasar."
+
+[sub_resource type="Resource" id="board4"]
+script = ExtResource("2")
+title = "Kisah Rumah"
+words = PackedStringArray("ꦱꦥ", "ꦄꦤ", "ꦆꦁ", "ꦎꦩꦃ")
+meanings = PackedStringArray("siapa", "ada", "di", "rumah")
+translation = "Siapa ada di rumah?"
+
+[resource]
+script = ExtResource("1")
+script_name = "Aksara Jawa"
+font_path = "res://Assets/Fonts/NotoSansJavanese.ttf"
+boards = [SubResource("board1"), SubResource("board2"), SubResource("board3"), SubResource("board4")]
+question_words = PackedStringArray("ꦱꦥ", "ꦩꦔꦤ꧀", "ꦱꦸꦏꦼꦠ꧀")
+answers = PackedStringArray("sapi")

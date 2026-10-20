@@ -1,14 +1,13 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bigvlhamorl2s"]
 
 [ext_resource type="Script" uid="uid://dfgdp738qmigp" path="res://Code/ItemData.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bt58tmvr2rcop" path="res://Assets/Items/batik_parang_icon.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://dov5g8k7pr3xy" path="res://Assets/Items/batik_parang.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cvox1clw1toee" path="res://Assets/Items/batikparang.png" id="1_bjnrq"]
 
 [resource]
 script = ExtResource("1")
 id = &"batik_parang"
 display_name = "Batik Parang"
-icon = ExtResource("2")
-large_image = ExtResource("3")
+icon = ExtResource("1_bjnrq")
+large_image = ExtResource("1_bjnrq")
 description = "Motif garis diagonal bersambung khas Jawa (Yogyakarta/Solo)."
-hint = "Carilah batik dengan garis diagonal bersambung, motif khas keraton Jawa."
+hint = "Carilah batik dengan garis diagonal bersambung."
