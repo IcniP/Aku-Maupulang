@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"hanoman"
+tipe = 0
+judul = "Hanoman"
+daerah = "Jawa dan Bali"
+deskripsi = "Hanoman adalah kera putih yang gagah dalam kisah Ramayana, dikenal setia kepada Rama. Ia melompati lautan menuju Alengka untuk menemui Sinta dan membawa kabar kepada junjungannya. Kecerdikan, keberanian, dan kesetiaannya menjadikan Hanoman tokoh yang dicintai dalam wayang kulit, wayang orang, dan tari kecak di Bali hingga kini."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"barong"
+tipe = 0
+judul = "Barong"
+daerah = "Bali"
+deskripsi = "Barong adalah makhluk mitologi Bali berwujud singa berbulu lebat yang dianggap pelindung dan lambang kebaikan. Dalam pertunjukan Calonarang, Barong berhadapan dengan Rangda, sosok yang melambangkan kekuatan gelap. Pertarungan keduanya tidak berakhir dengan kemenangan mutlak, melainkan menggambarkan keseimbangan alam. Tarian ini sering dipentaskan dalam upacara dan menjadi daya tarik budaya Bali."

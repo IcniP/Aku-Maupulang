@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"dewi_sri"
+tipe = 0
+judul = "Dewi Sri"
+daerah = "Jawa, Sunda, dan Bali"
+deskripsi = "Dewi Sri dihormati masyarakat Jawa, Sunda, dan Bali sebagai dewi padi, kesuburan, dan kemakmuran. Petani tradisional menyiapkan sesaji dan upacara panen untuk mengungkapkan rasa syukur atas hasil sawah. Sosoknya mengingatkan bahwa sebutir nasi lahir dari kerja keras, air, tanah, dan alam yang dijaga bersama oleh banyak orang."

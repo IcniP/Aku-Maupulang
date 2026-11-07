@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"malin_kundang"
+tipe = 0
+judul = "Malin Kundang"
+daerah = "Sumatera Barat"
+deskripsi = "Malin Kundang adalah cerita rakyat Sumatera Barat tentang anak nelayan miskin yang merantau dan menjadi kaya. Ketika kembali, ia malu mengakui ibunya. Dalam kisah itu, sang ibu berdoa dengan hati terluka, lalu kapal Malin berubah menjadi batu di tepi pantai. Pesan utamanya mengajak setiap anak menghormati orang tua."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"batu_menangis"
+tipe = 1
+judul = "Legenda Batu Menangis"
+daerah = "Kalimantan Barat"
+deskripsi = "Legenda Batu Menangis dituturkan di Kalimantan Barat tentang seorang gadis cantik yang malu mengakui ibunya yang miskin. Dalam kisah itu, sang ibu berdoa dengan sedih sehingga gadis tersebut berubah menjadi batu yang terus meneteskan air. Pesan utamanya mengajak setiap anak menyayangi dan menghormati ibu, apa pun keadaannya."

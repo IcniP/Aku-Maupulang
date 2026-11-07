@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"timun_mas"
+tipe = 1
+judul = "Timun Mas"
+daerah = "Jawa Tengah"
+deskripsi = "Timun Mas adalah dongeng Jawa tentang anak yang lahir dari buah mentimun, hadiah bagi Mbok Sirni dari raksasa. Ketika dewasa, ia dikejar sang raksasa. Biji mentimun, jarum, garam, dan terasi dari ibunya berubah menjadi kebun, hutan bambu, laut, dan lumpur. Kisahnya memuji kecerdikan, keberanian, dan restu orang tua."

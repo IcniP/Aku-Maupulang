@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"legenda_danau_toba"
+tipe = 1
+judul = "Legenda Danau Toba"
+daerah = "Sumatera Utara"
+deskripsi = "Legenda Danau Toba bercerita tentang seorang petani yang menikahi perempuan jelmaan ikan dan berjanji merahasiakan asal-usulnya. Ketika janji itu dilanggar, air bah menggenangi lembah hingga membentuk danau, dengan Pulau Samosir di tengahnya. Secara ilmiah, danau itu lahir dari letusan gunung api purba, tetapi legenda tetap mengajarkan pentingnya menepati janji."

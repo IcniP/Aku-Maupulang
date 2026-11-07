@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"putri_mandalika"
+tipe = 1
+judul = "Putri Mandalika"
+daerah = "Lombok, Nusa Tenggara Barat"
+deskripsi = "Putri Mandalika adalah putri raja dalam legenda Lombok yang dipinang banyak pangeran. Agar tidak terjadi perselisihan, ia memilih menceburkan diri ke laut, lalu muncul sebagai cacing laut berwarna-warni bernama nyale. Setiap tahun masyarakat Lombok memperingatinya dalam tradisi Bau Nyale, yaitu mencari nyale bersama di pantai sebagai tanda syukur dan persaudaraan."

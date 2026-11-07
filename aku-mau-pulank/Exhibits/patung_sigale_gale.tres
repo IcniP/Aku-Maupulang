@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"sigale_gale"
+tipe = 0
+judul = "Sigale-gale"
+daerah = "Batak, Sumatera Utara"
+deskripsi = "Sigale-gale adalah patung kayu bertali dari tanah Batak, terutama dikenal di Pulau Samosir. Menurut tuturan setempat, patung ini dibuat untuk mengenang seorang pemuda yang meninggal. Pemainnya menggerakkan lengan dan kepalanya mengikuti irama gondang. Pertunjukan ini menjadi cara masyarakat menghormati leluhur sekaligus mewariskan seni Batak kepada generasi muda."
