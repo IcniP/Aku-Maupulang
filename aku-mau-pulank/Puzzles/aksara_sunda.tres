@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="AksaraPuzzle" format=3]
+[gd_resource type="Resource" script_class="AksaraPuzzle" format=3 uid="uid://lr1o0r8redou"]
 
-[ext_resource type="Script" path="res://Code/AksaraPuzzle.gd" id="1"]
-[ext_resource type="Script" path="res://Code/StoryBoard.gd" id="2"]
+[ext_resource type="Script" uid="uid://cl4s4r7nyv1h1" path="res://Code/AksaraPuzzle.gd" id="1"]
+[ext_resource type="Script" uid="uid://b8xf15tv7wky8" path="res://Code/StoryBoard.gd" id="2"]
 
 [sub_resource type="Resource" id="board1"]
 script = ExtResource("2")

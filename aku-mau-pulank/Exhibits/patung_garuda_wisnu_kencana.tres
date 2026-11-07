@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"garuda_wisnu_kencana"
+tipe = 0
+judul = "Garuda Wisnu Kencana"
+daerah = "Bali"
+deskripsi = "Patung Garuda Wisnu Kencana menggambarkan Dewa Wisnu yang menunggangi Garuda, burung raksasa kendaraannya. Dalam kisah Hindu, Garuda berjuang membebaskan ibunya dari perbudakan, sehingga ia dikenal sebagai lambang bakti dan kesetiaan. Monumen megah ini berdiri di Bali dan menjadi kebanggaan masyarakat. Garuda juga menjadi lambang negara Indonesia."

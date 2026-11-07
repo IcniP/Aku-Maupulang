@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"si_pitung"
+tipe = 0
+judul = "Si Pitung"
+daerah = "Betawi"
+deskripsi = "Si Pitung dikenang dalam tradisi Betawi sebagai jagoan dari wilayah Batavia pada akhir abad kesembilan belas. Cerita lisan menuturkan bahwa ia membela rakyat kecil dari ketidakadilan masa penjajahan. Sebagian kisahnya berpadu dengan legenda, namun namanya tetap hidup dalam lakon, cerita, dan semangat warga Jakarta tentang keberanian serta pembelaan terhadap sesama."

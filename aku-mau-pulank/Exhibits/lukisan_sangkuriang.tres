@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"sangkuriang_tangkuban_perahu"
+tipe = 1
+judul = "Sangkuriang dan Tangkuban Perahu"
+daerah = "Jawa Barat"
+deskripsi = "Sangkuriang adalah tokoh legenda Sunda yang meminang Dayang Sumbi tanpa menyadari bahwa ia ibunya. Dayang Sumbi mengajukan syarat berupa telaga dan perahu dalam semalam. Ketika usahanya gagal, Sangkuriang menendang perahu itu hingga terbalik. Masyarakat percaya, bentuk Gunung Tangkuban Perahu di dekat Bandung berasal dari perahu yang terbalik tersebut."

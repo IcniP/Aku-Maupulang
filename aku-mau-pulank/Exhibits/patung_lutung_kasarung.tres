@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"lutung_kasarung"
+tipe = 0
+judul = "Lutung Kasarung"
+daerah = "Jawa Barat"
+deskripsi = "Lutung Kasarung adalah dongeng Sunda tentang Guru Minda, pangeran kahyangan yang turun ke bumi dalam wujud lutung hitam. Ia membantu Purbasari, putri yang diperlakukan tidak adil oleh kakaknya. Berkat ketulusan hati, kebenaran akhirnya terungkap dan Purbasari memperoleh kembali kedudukannya. Kisah ini mengajarkan bahwa kebaikan tidak ditentukan oleh rupa."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"gatotkaca"
+tipe = 0
+judul = "Gatotkaca"
+daerah = "Jawa"
+deskripsi = "Gatotkaca adalah ksatria dalam pewayangan Jawa, putra Bima dan Arimbi. Ia dikenal bertubuh kuat, berotot kawat bertulang besi, serta mampu terbang di angkasa. Dalam perang Bharatayuda, Gatotkaca berjuang membela para Pandawa. Wayang kulit sering menampilkannya sebagai teladan keberanian, kesetiaan, dan pengorbanan bagi penonton dari segala usia."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"roro_jonggrang_prambanan"
+tipe = 1
+judul = "Roro Jonggrang dan Candi Prambanan"
+daerah = "Jawa Tengah dan DIY"
+deskripsi = "Roro Jonggrang adalah putri raja dalam legenda Jawa yang dilamar Bandung Bondowoso. Ia mengajukan syarat seribu candi dalam satu malam. Menjelang fajar, para dayang menumbuk padi agar ayam berkokok dan pekerjaan terhenti. Legenda ini dikaitkan dengan arca Durga di Candi Prambanan, candi Hindu megah peninggalan abad kesembilan di dekat Yogyakarta."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"manik_angkeran_selat_bali"
+tipe = 1
+judul = "Manik Angkeran dan Asal Selat Bali"
+daerah = "Bali"
+deskripsi = "Manik Angkeran adalah putra Sidi Mantra, pendeta Bali yang bijak. Karena gemar berjudi, ia meminta harta kepada naga Besukih dan akhirnya mencelakai dirinya. Sang ayah memohon kepada naga agar putranya hidup kembali, lalu memisahkan Bali dari Jawa dengan tongkatnya. Legenda ini menjelaskan asal Selat Bali dan mengajarkan pentingnya kejujuran."

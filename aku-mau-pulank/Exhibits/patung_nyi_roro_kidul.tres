@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExhibitData" format=3]
+
+[ext_resource type="Script" path="res://Code/ExhibitData.gd" id="1_exhibit"]
+
+[resource]
+script = ExtResource("1_exhibit")
+id = &"nyi_roro_kidul"
+tipe = 0
+judul = "Nyi Roro Kidul"
+daerah = "Jawa"
+deskripsi = "Nyi Roro Kidul dikenal dalam cerita rakyat Jawa sebagai penguasa Laut Selatan. Masyarakat pesisir menuturkan kisahnya turun-temurun, dan Keraton Yogyakarta setiap tahun menggelar upacara labuhan di pantai selatan. Upacara itu dimaknai sebagai tanda syukur. Kisah ini mengingatkan manusia agar bersikap hormat kepada laut dan alam."
