@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"padri_adat"
+tahun = 1821
+kata_kunci = "kaum Adat"
+kalimat_benar = "Pada 1821, Belanda mulai ikut campur dalam Perang Padri setelah bekerja sama dengan kaum Adat."
+varian_salah = PackedStringArray("Pada 1812, Belanda mulai ikut campur dalam Perang Padri setelah bekerja sama dengan kaum Adat.", "Pada 1821, Belanda mulai ikut campur dalam Perang Padri setelah bekerja sama dengan kaum Padri.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"padri_bonjol"
+tahun = 1837
+kata_kunci = "Benteng Bonjol"
+kalimat_benar = "Benteng Bonjol jatuh dan Imam Bonjol ditangkap pada 1837."
+varian_salah = PackedStringArray("Benteng Bonjol jatuh dan Imam Bonjol ditangkap pada 1873.", "Benteng Bonjol berhasil dipertahankan dan Imam Bonjol tidak pernah ditangkap pada 1837.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"padri_lotta"
+tahun = 1864
+kata_kunci = "Lotta"
+kalimat_benar = "Imam Bonjol wafat di Lotta pada 1864."
+varian_salah = PackedStringArray("Imam Bonjol wafat di Lotta pada 1846.", "Imam Bonjol wafat di Padang pada 1864.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Nama kecil Imam Bonjol adalah Peto Syarif."
+kata_kunci = "Peto Syarif"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Imam Bonjol sempat dibuang ke Ambon sebelum dipindahkan ke Minahasa."
+kata_kunci = "Ambon"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"imam_bonjol"
+tipe = 1
+judul = "Tuanku Imam Bonjol dan Perang Padri"
+era = "Perang Padri, Sumatera Barat"
+teks_label = "Lukisan ini menggambarkan Tuanku Imam Bonjol, tokoh utama Perang Padri di Sumatera Barat. Pada [b]1821[/b], Belanda mulai ikut campur setelah bekerja sama dengan kaum Adat. Benteng Bonjol jatuh dan Imam Bonjol ditangkap pada [b]1837[/b]. Ia dibuang ke Lotta, Minahasa, tempat ia wafat pada [b]1864[/b], dan kini dihormati sebagai pahlawan nasional."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

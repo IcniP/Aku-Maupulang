@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"prambanan_lons"
+tahun = 1733
+kata_kunci = "Lons"
+kalimat_benar = "Reruntuhan Candi Prambanan dilaporkan oleh C.A. Lons pada 1733."
+varian_salah = PackedStringArray("Reruntuhan Candi Prambanan dilaporkan oleh C.A. Lons pada 1773.", "Reruntuhan Candi Prambanan dilaporkan oleh Thomas Stamford Raffles pada 1733.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"prambanan_pemugaran"
+tahun = 1918
+kata_kunci = "Pemugaran Prambanan"
+kalimat_benar = "Pemugaran Prambanan dimulai pada 1918."
+varian_salah = PackedStringArray("Pemugaran Prambanan dimulai pada 1981.", "Pemugaran Prambanan dimulai pada 1918 dan selesai seluruhnya dalam waktu satu tahun.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"prambanan_gempa"
+tahun = 2006
+kata_kunci = "Gempa bumi"
+kalimat_benar = "Gempa bumi pada 2006 merusak sejumlah candi di Jawa Tengah."
+varian_salah = PackedStringArray("Gempa bumi pada 2016 merusak sejumlah candi di Jawa Tengah.", "Gempa bumi pada 2006 tidak menimbulkan kerusakan pada candi di Jawa Tengah.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Candi Siwa di kompleks Candi Prambanan setinggi 47 meter."
+kata_kunci = "47 meter"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Dinding Candi Siwa di Prambanan dihiasi relief Ramayana."
+kata_kunci = "relief Ramayana"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"prambanan"
+tipe = 0
+judul = "Miniatur Candi Prambanan"
+era = "Mataram Kuno, Jawa Tengah dan DIY"
+teks_label = "Kompleks candi Hindu ini berdiri di perbatasan Yogyakarta dan Jawa Tengah, dan Candi Siwa menjadi bangunan utamanya. Reruntuhannya dilaporkan oleh C.A. Lons pada [b]1733[/b]. Pemugaran Prambanan dimulai pada [b]1918[/b] dan berlanjut puluhan tahun. Gempa bumi mengguncang Jawa Tengah pada [b]2006[/b] dan merusak sejumlah candi, sehingga perbaikan kembali dilakukan. Kompleks ini kini dikunjungi banyak wisatawan."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

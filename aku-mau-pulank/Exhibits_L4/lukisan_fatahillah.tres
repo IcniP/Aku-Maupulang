@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"fatahillah_leme"
+tahun = 1522
+kata_kunci = "Henrique Leme"
+kalimat_benar = "Pada 1522, utusan Portugis Henrique Leme menjalin perjanjian dengan Kerajaan Sunda."
+varian_salah = PackedStringArray("Pada 1552, utusan Portugis Henrique Leme menjalin perjanjian dengan Kerajaan Sunda.", "Pada 1522, utusan Belanda Cornelis de Houtman menjalin perjanjian dengan Kerajaan Sunda.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"fatahillah_banten"
+tahun = 1526
+kata_kunci = "Banten"
+kalimat_benar = "Fatahillah merebut Banten pada 1526."
+varian_salah = PackedStringArray("Fatahillah merebut Banten pada 1562.", "Pasukan Portugis merebut Banten pada 1526.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"fatahillah_jayakarta"
+tahun = 1527
+kata_kunci = "Jayakarta"
+kalimat_benar = "Pada 1527, Fatahillah mengusir Portugis dari Sunda Kelapa dan menamai kota itu Jayakarta."
+varian_salah = PackedStringArray("Pada 1572, Fatahillah mengusir Portugis dari Sunda Kelapa dan menamai kota itu Jayakarta.", "Pada 1527, Portugis berhasil mempertahankan Sunda Kelapa dari Fatahillah.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Fatahillah juga dikenal dengan nama Faletehan."
+kata_kunci = "Faletehan"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Sunda Kelapa dahulu merupakan pelabuhan milik Kerajaan Pajajaran."
+kata_kunci = "Pajajaran"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"fatahillah"
+tipe = 1
+judul = "Fatahillah dan Sunda Kelapa"
+era = "Abad ke-16, pesisir utara Jawa"
+teks_label = "Lukisan ini menceritakan Fatahillah dan pelabuhan Sunda Kelapa. Pada [b]1522[/b], utusan Portugis Henrique Leme menjalin perjanjian dengan Kerajaan Sunda. Fatahillah merebut Banten pada [b]1526[/b]. Ia kemudian mengusir Portugis dari Sunda Kelapa pada [b]1527[/b] dan mengganti nama kota itu menjadi Jayakarta, yang berarti kemenangan yang sempurna. Peristiwa ini menjadi awal sejarah kota yang kelak menjadi ibu kota negara."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

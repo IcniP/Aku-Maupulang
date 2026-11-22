@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"aceh_perang"
+tahun = 1873
+kata_kunci = "menyatakan perang"
+kalimat_benar = "Pada 1873, Belanda menyatakan perang kepada Kesultanan Aceh."
+varian_salah = PackedStringArray("Pada 1893, Belanda menyatakan perang kepada Kesultanan Aceh.", "Pada 1873, Kesultanan Aceh menyatakan perang kepada Belanda.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"aceh_teuku_umar"
+tahun = 1899
+kata_kunci = "Teuku Umar"
+kalimat_benar = "Teuku Umar gugur dalam pertempuran pada 1899."
+varian_salah = PackedStringArray("Teuku Umar gugur dalam pertempuran pada 1889.", "Teuku Umar selamat dalam pertempuran pada 1899 dan terus memimpin perlawanan.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"aceh_cut_nyak_dhien"
+tahun = 1908
+kata_kunci = "Cut Nyak Dhien"
+kalimat_benar = "Cut Nyak Dhien wafat di pengasingan pada 1908."
+varian_salah = PackedStringArray("Cut Nyak Dhien wafat di pengasingan pada 1918.", "Cut Nyak Dhien wafat dalam pertempuran di Aceh pada 1908.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Teuku Umar gugur di dekat Meulaboh."
+kata_kunci = "Meulaboh"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Sultan terakhir Aceh bernama Muhammad Daud Syah."
+kata_kunci = "Daud Syah"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"perang_aceh"
+tipe = 1
+judul = "Perang Aceh"
+era = "Kesultanan Aceh, masa kolonial"
+teks_label = "Lukisan ini menggambarkan Perang Aceh, salah satu perlawanan terpanjang melawan pemerintah kolonial Belanda. Pada [b]1873[/b], Belanda menyatakan perang kepada Kesultanan Aceh. Teuku Umar gugur dalam pertempuran pada [b]1899[/b]. Cut Nyak Dhien, istri Teuku Umar yang terus melanjutkan perlawanan, wafat di pengasingan pada [b]1908[/b]. Kisah mereka dikenang sebagai teladan keberanian rakyat Aceh."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

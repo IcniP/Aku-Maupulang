@@ -139,6 +139,7 @@ func _uji_scene() -> void:
 	print("\n=== B. Simulasi permainan di Scene/level3.tscn ===")
 	var lvl: Node = load("res://Scene/level3.tscn").instantiate()
 	add_child(lvl)
+	lvl.next_scene = null   # di game asli next_scene = Level 4; dikosongkan hanya untuk menguji toast "belum tersedia"
 	await _tunggu(3)
 	var hasil: Level3Generator.Hasil = lvl.hasil
 	var ui: Level3UI = lvl.ui

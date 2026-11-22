@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"proklamasi_sumpah_pemuda"
+tahun = 1928
+kata_kunci = "Sumpah Pemuda"
+kalimat_benar = "Sumpah Pemuda diikrarkan pada 1928."
+varian_salah = PackedStringArray("Sumpah Pemuda diikrarkan pada 1938.", "Sumpah Pemuda pada 1928 menegaskan bahwa para pemuda tetap berjuang secara terpisah menurut daerahnya.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"proklamasi_pegangsaan"
+tahun = 1945
+kata_kunci = "Pegangsaan Timur"
+kalimat_benar = "Soekarno dan Mohammad Hatta menyatakan kemerdekaan Indonesia di Pegangsaan Timur pada 1945."
+varian_salah = PackedStringArray("Soekarno dan Mohammad Hatta menyatakan kemerdekaan Indonesia di Pegangsaan Timur pada 1954.", "Jenderal Soedirman menyatakan kemerdekaan Indonesia di Pegangsaan Timur pada 1945.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"proklamasi_kmb"
+tahun = 1949
+kata_kunci = "Konferensi Meja Bundar"
+kalimat_benar = "Belanda mengakui kedaulatan Indonesia setelah Konferensi Meja Bundar pada 1949."
+varian_salah = PackedStringArray("Belanda mengakui kedaulatan Indonesia setelah Konferensi Meja Bundar pada 1994.", "Belanda menolak mengakui kedaulatan Indonesia setelah Konferensi Meja Bundar pada 1949.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Naskah proklamasi diketik oleh Sayuti Melik."
+kata_kunci = "Sayuti Melik"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Bendera Merah Putih saat proklamasi dijahit oleh Fatmawati."
+kata_kunci = "Fatmawati"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"proklamasi"
+tipe = 1
+judul = "Proklamasi Kemerdekaan"
+era = "Perjalanan menuju kemerdekaan Indonesia"
+teks_label = "Lukisan ini menggambarkan perjalanan bangsa Indonesia menuju kemerdekaan. Pada [b]1928[/b], para pemuda mengikrarkan Sumpah Pemuda sebagai tekad untuk bersatu. Soekarno dan Mohammad Hatta menyatakan kemerdekaan Indonesia di Pegangsaan Timur pada [b]1945[/b]. Belanda mengakui kedaulatan Indonesia setelah Konferensi Meja Bundar pada [b]1949[/b]. Peristiwa-peristiwa itu menjadi dasar kebangsaan Indonesia hingga kini dan terus dipelajari generasi muda."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

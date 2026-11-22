@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"borobudur_raffles"
+tahun = 1814
+kata_kunci = "Raffles"
+kalimat_benar = "Pada 1814, reruntuhan Candi Borobudur dibersihkan atas perintah Thomas Stamford Raffles."
+varian_salah = PackedStringArray("Pada 1841, reruntuhan Candi Borobudur dibersihkan atas perintah Thomas Stamford Raffles.", "Pada 1814, reruntuhan Candi Borobudur dibersihkan atas perintah Herman Willem Daendels.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"borobudur_van_erp"
+tahun = 1907
+kata_kunci = "van Erp"
+kalimat_benar = "Pemugaran besar pertama Candi Borobudur dipimpin Theodoor van Erp dan dimulai pada 1907."
+varian_salah = PackedStringArray("Pemugaran besar pertama Candi Borobudur dipimpin Theodoor van Erp dan dimulai pada 1927.", "Pemugaran besar pertama Candi Borobudur dipimpin Thomas Stamford Raffles dan dimulai pada 1907.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"borobudur_warisan"
+tahun = 1991
+kata_kunci = "Warisan Dunia"
+kalimat_benar = "Pada 1991, Candi Borobudur ditetapkan sebagai Warisan Dunia."
+varian_salah = PackedStringArray("Pada 1971, Candi Borobudur ditetapkan sebagai Warisan Dunia.", "Pada 1991, Candi Borobudur ditolak untuk dijadikan Warisan Dunia.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Candi Borobudur memiliki 504 arca Buddha."
+kata_kunci = "504"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Candi Borobudur tersusun dari sembilan teras bertingkat."
+kata_kunci = "sembilan teras"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"borobudur"
+tipe = 0
+judul = "Miniatur Candi Borobudur"
+era = "Mataram Kuno, Jawa Tengah"
+teks_label = "Candi Buddha terbesar di dunia ini terletak di Magelang, Jawa Tengah. Setelah lama tertutup tanah dan semak, reruntuhannya dibersihkan pada [b]1814[/b] atas perintah Thomas Stamford Raffles. Pemugaran besar pertama dipimpin Theodoor van Erp dan dimulai pada [b]1907[/b]. Lembaga dunia menetapkannya sebagai Warisan Dunia pada [b]1991[/b], dan candi ini terus dirawat sebagai tujuan ziarah dan wisata."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])
