@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"batavia_coen"
+tahun = 1619
+kata_kunci = "Coen"
+kalimat_benar = "Jan Pieterszoon Coen mendirikan Batavia pada 1619."
+varian_salah = PackedStringArray("Jan Pieterszoon Coen mendirikan Batavia pada 1691.", "Cornelis Speelman mendirikan Batavia pada 1619.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"batavia_stadhuis"
+tahun = 1710
+kata_kunci = "Stadhuis"
+kalimat_benar = "Balai kota Batavia yang disebut Stadhuis selesai dibangun pada 1710."
+varian_salah = PackedStringArray("Balai kota Batavia yang disebut Stadhuis selesai dibangun pada 1701.", "Balai kota Batavia yang disebut Stadhuis mulai dibongkar pada 1710.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"batavia_tionghoa"
+tahun = 1740
+kata_kunci = "Tionghoa"
+kalimat_benar = "Pada 1740, kerusuhan besar di Batavia menimbulkan banyak korban dari kalangan warga Tionghoa."
+varian_salah = PackedStringArray("Pada 1704, kerusuhan besar di Batavia menimbulkan banyak korban dari kalangan warga Tionghoa.", "Pada 1740, kerusuhan besar di Batavia menimbulkan banyak korban dari kalangan pasukan Eropa.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Batavia memiliki banyak kanal yang dibangun menyerupai kota-kota di negeri Belanda."
+kata_kunci = "kanal"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Batavia pernah dijuluki Ratu dari Timur."
+kata_kunci = "Ratu dari Timur"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"kota_batavia"
+tipe = 0
+judul = "Miniatur Kota Batavia"
+era = "Masa VOC, pesisir utara Jawa"
+teks_label = "Miniatur ini menggambarkan Batavia, pusat kegiatan VOC di Jawa. Jan Pieterszoon Coen mendirikan kota ini pada [b]1619[/b]. Balai kota yang disebut Stadhuis selesai dibangun pada [b]1710[/b]. Pada [b]1740[/b], kerusuhan besar di kota itu menimbulkan banyak korban dari kalangan warga Tionghoa. Kawasan kota tua tersebut kini dilestarikan sebagai tempat belajar sejarah dan wisata."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

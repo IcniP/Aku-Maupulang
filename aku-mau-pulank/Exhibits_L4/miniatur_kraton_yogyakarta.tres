@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"kraton_giyanti"
+tahun = 1755
+kata_kunci = "Giyanti"
+kalimat_benar = "Perjanjian Giyanti pada 1755 membagi Kerajaan Mataram."
+varian_salah = PackedStringArray("Perjanjian Giyanti pada 1775 membagi Kerajaan Mataram.", "Perjanjian Giyanti pada 1755 menyatukan kembali seluruh Kerajaan Mataram.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"kraton_mangkubumi"
+tahun = 1756
+kata_kunci = "Mangkubumi"
+kalimat_benar = "Pangeran Mangkubumi mulai menempati Kraton Yogyakarta pada 1756."
+varian_salah = PackedStringArray("Pangeran Mangkubumi mulai menempati Kraton Yogyakarta pada 1856.", "Pakubuwana III mulai menempati Kraton Yogyakarta pada 1756.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"kraton_maklumat"
+tahun = 1945
+kata_kunci = "maklumat"
+kalimat_benar = "Pada 1945, Sultan Hamengkubuwana IX menyatakan Yogyakarta bergabung dengan Republik Indonesia melalui sebuah maklumat."
+varian_salah = PackedStringArray("Pada 1950, Sultan Hamengkubuwana IX menyatakan Yogyakarta bergabung dengan Republik Indonesia melalui sebuah maklumat.", "Pada 1945, Sultan Hamengkubuwana IX menyatakan Yogyakarta tetap terpisah dari Republik Indonesia melalui sebuah maklumat.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Alun-alun Selatan terletak di sisi selatan Kraton Yogyakarta."
+kata_kunci = "Alun-alun Selatan"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Tugu Yogyakarta berdiri di sisi utara kraton."
+kata_kunci = "Tugu"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"kraton_yogyakarta"
+tipe = 0
+judul = "Miniatur Kraton Yogyakarta"
+era = "Kesultanan Yogyakarta"
+teks_label = "Kraton Yogyakarta berdiri setelah Perjanjian Giyanti pada [b]1755[/b] membagi Kerajaan Mataram. Pangeran Mangkubumi, yang bergelar Sultan Hamengkubuwana I, mulai menempati kraton pada [b]1756[/b]. Pada [b]1945[/b], Sri Sultan Hamengkubuwana IX menyatakan Yogyakarta bergabung dengan Republik Indonesia melalui sebuah maklumat. Kraton ditata menurut filosofi Jawa dan masih menjadi tempat tinggal sultan. Banyak wisatawan datang untuk mengenal seni dan tradisi istana."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

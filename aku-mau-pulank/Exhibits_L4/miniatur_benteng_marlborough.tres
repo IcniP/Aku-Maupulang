@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"marlborough_fort_york"
+tahun = 1685
+kata_kunci = "Fort York"
+kalimat_benar = "Inggris mendirikan Fort York di Bengkulu pada 1685."
+varian_salah = PackedStringArray("Inggris mendirikan Fort York di Bengkulu pada 1658.", "Belanda mendirikan Fort York di Bengkulu pada 1685.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"marlborough_dibangun"
+tahun = 1714
+kata_kunci = "Marlborough"
+kalimat_benar = "Pembangunan Benteng Marlborough di Bengkulu dimulai pada 1714."
+varian_salah = PackedStringArray("Pembangunan Benteng Marlborough di Bengkulu dimulai pada 1741.", "Pembangunan Benteng Marlborough di Bengkulu dimulai pada 1714 oleh Belanda.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"marlborough_traktat"
+tahun = 1824
+kata_kunci = "Traktat London"
+kalimat_benar = "Setelah Traktat London pada 1824, Inggris menyerahkan Bengkulu kepada Belanda."
+varian_salah = PackedStringArray("Setelah Traktat London pada 1842, Inggris menyerahkan Bengkulu kepada Belanda.", "Setelah Traktat London pada 1824, Belanda menyerahkan Bengkulu kepada Inggris.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Benteng Marlborough menghadap ke Samudra Hindia."
+kata_kunci = "Samudra Hindia"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Benteng Marlborough dibangun Inggris untuk melindungi perdagangan lada."
+kata_kunci = "perdagangan lada"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"benteng_marlborough"
+tipe = 0
+judul = "Miniatur Benteng Marlborough"
+era = "Masa pemerintahan Inggris, Bengkulu"
+teks_label = "Benteng ini berdiri di Bengkulu, Sumatera, sebagai peninggalan pemerintahan Inggris. Orang Inggris mendirikan Fort York di sana pada [b]1685[/b]. Pembangunan Benteng Marlborough dimulai pada [b]1714[/b] dan benteng ini menjadi pusat kekuasaan Inggris di pesisir barat Sumatera. Setelah Traktat London pada [b]1824[/b], Inggris menyerahkan Bengkulu kepada Belanda. Kini bangunan itu dirawat sebagai cagar budaya dan dikunjungi banyak wisatawan."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"demak_malaka"
+tahun = 1513
+kata_kunci = "Pati Unus"
+kalimat_benar = "Pati Unus memimpin serangan Demak ke Malaka pada 1513."
+varian_salah = PackedStringArray("Pati Unus memimpin serangan Demak ke Malaka pada 1531.", "Trenggana memimpin serangan Demak ke Malaka pada 1513.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"demak_trenggana"
+tahun = 1521
+kata_kunci = "Trenggana"
+kalimat_benar = "Trenggana naik takhta Demak pada 1521."
+varian_salah = PackedStringArray("Trenggana naik takhta Demak pada 1541.", "Pati Unus naik takhta Demak pada 1521.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"demak_panarukan"
+tahun = 1546
+kata_kunci = "Panarukan"
+kalimat_benar = "Trenggana wafat pada 1546 ketika memimpin pasukan ke Panarukan."
+varian_salah = PackedStringArray("Trenggana wafat pada 1564 ketika memimpin pasukan ke Panarukan.", "Trenggana selamat dan terus memerintah setelah pasukannya tiba di Panarukan pada 1546.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Masjid Agung Demak memiliki empat tiang utama yang disebut saka guru."
+kata_kunci = "saka guru"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Atap Masjid Agung Demak bertingkat tiga."
+kata_kunci = "bertingkat tiga"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"masjid_demak"
+tipe = 0
+judul = "Miniatur Masjid Agung Demak"
+era = "Kesultanan Demak, Jawa Tengah"
+teks_label = "Masjid Agung Demak di Jawa Tengah dikenal sebagai salah satu masjid tertua di Jawa dan berkaitan erat dengan Kesultanan Demak. Pati Unus memimpin serangan ke Malaka pada [b]1513[/b]. Trenggana naik takhta pada [b]1521[/b], lalu wafat ketika memimpin pasukan ke Panarukan pada [b]1546[/b]. Masjid itu kini tetap digunakan untuk ibadah dan menarik banyak peziarah."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

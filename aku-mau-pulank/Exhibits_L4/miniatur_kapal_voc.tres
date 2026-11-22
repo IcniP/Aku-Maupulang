@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"voc_de_houtman"
+tahun = 1596
+kata_kunci = "de Houtman"
+kalimat_benar = "Cornelis de Houtman tiba di Nusantara pada 1596 sebagai pemimpin pelayaran pertama Belanda."
+varian_salah = PackedStringArray("Cornelis de Houtman tiba di Nusantara pada 1569 sebagai pemimpin pelayaran pertama Belanda.", "Cornelis Speelman tiba di Nusantara pada 1596 sebagai pemimpin pelayaran pertama Belanda.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"voc_didirikan"
+tahun = 1602
+kata_kunci = "Vereenigde Oostindische Compagnie"
+kalimat_benar = "Vereenigde Oostindische Compagnie (VOC) dibentuk oleh para pedagang Belanda pada 1602."
+varian_salah = PackedStringArray("Vereenigde Oostindische Compagnie (VOC) dibentuk oleh para pedagang Belanda pada 1620.", "Vereenigde Oostindische Compagnie (VOC) dibentuk oleh para pedagang Portugis pada 1602.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"voc_dibubarkan"
+tahun = 1799
+kata_kunci = "dibubarkan"
+kalimat_benar = "VOC dibubarkan pada 1799 dan wilayahnya diambil alih pemerintah Belanda."
+varian_salah = PackedStringArray("VOC dibubarkan pada 1779 dan wilayahnya diambil alih pemerintah Belanda.", "VOC dibubarkan pada 1799 dan wilayahnya diserahkan kepada Inggris.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Kapal-kapal VOC dari Eropa berlayar melewati Tanjung Harapan."
+kata_kunci = "Tanjung Harapan"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "VOC memperoleh hak monopoli perdagangan rempah-rempah di wilayah kekuasaannya."
+kata_kunci = "monopoli"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"kapal_voc"
+tipe = 0
+judul = "Miniatur Kapal VOC"
+era = "Masa pelayaran Belanda ke Nusantara"
+teks_label = "Kapal layar seperti ini mengangkut pelaut dan barang dagangan dari Eropa ke Nusantara. Cornelis de Houtman tiba pada [b]1596[/b] sebagai pemimpin pelayaran pertama Belanda ke wilayah ini. Persekutuan dagang bernama Vereenigde Oostindische Compagnie, atau VOC, dibentuk oleh para pedagang Belanda pada [b]1602[/b]. VOC dibubarkan pada [b]1799[/b] dan wilayahnya diambil alih pemerintah Belanda."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

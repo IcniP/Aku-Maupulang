@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"majapahit_raden_wijaya"
+tahun = 1293
+kata_kunci = "Raden Wijaya"
+kalimat_benar = "Raden Wijaya mendirikan Kerajaan Majapahit pada 1293."
+varian_salah = PackedStringArray("Raden Wijaya mendirikan Kerajaan Majapahit pada 1393.", "Hayam Wuruk mendirikan Kerajaan Majapahit pada 1293.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"majapahit_hayam_wuruk"
+tahun = 1350
+kata_kunci = "Hayam Wuruk"
+kalimat_benar = "Hayam Wuruk naik takhta Majapahit pada 1350."
+varian_salah = PackedStringArray("Hayam Wuruk naik takhta Majapahit pada 1330.", "Gajah Mada naik takhta Majapahit pada 1350.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"majapahit_bubat"
+tahun = 1357
+kata_kunci = "Bubat"
+kalimat_benar = "Peristiwa Bubat terjadi pada 1357."
+varian_salah = PackedStringArray("Peristiwa Bubat terjadi pada 1375.", "Peristiwa Bubat mempererat hubungan Majapahit dengan Sunda pada 1357.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Dalam sumpahnya, Gajah Mada menyebut Tumasik sebagai salah satu wilayah yang akan ditundukkan."
+kata_kunci = "Tumasik"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Hayam Wuruk bergelar Rajasanagara."
+kata_kunci = "Rajasanagara"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"gajah_mada"
+tipe = 1
+judul = "Gajah Mada dan Sumpah Palapa"
+era = "Kerajaan Majapahit"
+teks_label = "Lukisan ini menggambarkan Gajah Mada, mahapatih Majapahit yang bersumpah menyatukan Nusantara dalam Sumpah Palapa. Kerajaan Majapahit didirikan Raden Wijaya pada [b]1293[/b]. Hayam Wuruk naik takhta pada [b]1350[/b]. Peristiwa Bubat terjadi pada [b]1357[/b] dan meninggalkan luka dalam hubungan Majapahit dengan Sunda. Kisah ini sering dipelajari di sekolah sebagai bagian dari sejarah kerajaan-kerajaan Nusantara, lengkap dengan peran tokoh-tokohnya."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

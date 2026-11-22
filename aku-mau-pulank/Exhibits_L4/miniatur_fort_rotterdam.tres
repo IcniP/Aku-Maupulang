@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"rotterdam_tunipalangga"
+tahun = 1545
+kata_kunci = "Tunipalangga"
+kalimat_benar = "Benteng Fort Rotterdam di Makassar dibangun oleh Kerajaan Gowa pada 1545 atas perintah Tunipalangga."
+varian_salah = PackedStringArray("Benteng Fort Rotterdam di Makassar dibangun oleh Kerajaan Gowa pada 1645 atas perintah Tunipalangga.", "Benteng Fort Rotterdam di Makassar dibangun oleh VOC pada 1545 atas perintah Cornelis Speelman.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"rotterdam_speelman"
+tahun = 1666
+kata_kunci = "Speelman"
+kalimat_benar = "Pasukan VOC di bawah Cornelis Speelman menyerang Makassar pada 1666."
+varian_salah = PackedStringArray("Pasukan VOC di bawah Cornelis Speelman menyerang Makassar pada 1696.", "Pasukan Portugis menyerang Makassar pada 1666.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"rotterdam_bongaya"
+tahun = 1667
+kata_kunci = "Bongaya"
+kalimat_benar = "Perjanjian Bongaya pada 1667 mengakhiri perang antara VOC dan Kerajaan Gowa."
+varian_salah = PackedStringArray("Perjanjian Bongaya pada 1767 mengakhiri perang antara VOC dan Kerajaan Gowa.", "Perjanjian Bongaya pada 1667 membuat VOC menyerahkan benteng kepada Kerajaan Gowa.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Bentuk Benteng Fort Rotterdam menyerupai seekor penyu."
+kata_kunci = "penyu"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Benteng Fort Rotterdam memiliki lima bastion."
+kata_kunci = "lima bastion"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"fort_rotterdam"
+tipe = 0
+judul = "Miniatur Benteng Fort Rotterdam"
+era = "Kerajaan Gowa dan VOC, Makassar"
+teks_label = "Benteng di Makassar ini mulanya dibangun oleh Kerajaan Gowa pada [b]1545[/b] atas perintah Tunipalangga. Pasukan VOC di bawah Cornelis Speelman menyerang Makassar pada [b]1666[/b]. Perjanjian Bongaya pada [b]1667[/b] mengakhiri perang itu dan menyerahkan benteng kepada VOC, yang kemudian menamainya Fort Rotterdam. Bangunan ini sekarang menjadi museum dan cagar budaya. Pengunjung dapat mempelajari sejarah Sulawesi Selatan di sana."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])

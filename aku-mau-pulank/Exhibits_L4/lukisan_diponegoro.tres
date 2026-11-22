@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SejarahKaryaData" format=3]
+
+[ext_resource type="Script" path="res://Code/SejarahKaryaData.gd" id="1_karya"]
+[ext_resource type="Script" path="res://Code/SejarahFaktaData.gd" id="2_fakta"]
+[ext_resource type="Script" path="res://Code/SejarahTakTerbuktiData.gd" id="3_tt"]
+
+[sub_resource type="Resource" id="Resource_f1"]
+script = ExtResource("2_fakta")
+id = &"diponegoro_tegalrejo"
+tahun = 1825
+kata_kunci = "Tegalrejo"
+kalimat_benar = "Perang Jawa dimulai dari Tegalrejo pada 1825."
+varian_salah = PackedStringArray("Perang Jawa dimulai dari Tegalrejo pada 1852.", "Perang Jawa dimulai dari Tegalrejo pada 1825 dengan Diponegoro berada di pihak pemerintah Belanda.")
+
+[sub_resource type="Resource" id="Resource_f2"]
+script = ExtResource("2_fakta")
+id = &"diponegoro_de_kock"
+tahun = 1830
+kata_kunci = "De Kock"
+kalimat_benar = "Jenderal De Kock menangkap Pangeran Diponegoro di Magelang pada 1830."
+varian_salah = PackedStringArray("Jenderal De Kock menangkap Pangeran Diponegoro di Magelang pada 1850.", "Jenderal Daendels menangkap Pangeran Diponegoro di Magelang pada 1830.")
+
+[sub_resource type="Resource" id="Resource_f3"]
+script = ExtResource("2_fakta")
+id = &"diponegoro_manado"
+tahun = 1833
+kata_kunci = "Manado"
+kalimat_benar = "Pangeran Diponegoro diasingkan ke Manado, lalu dipindahkan ke Makassar pada 1833."
+varian_salah = PackedStringArray("Pangeran Diponegoro diasingkan ke Manado, lalu dipindahkan ke Makassar pada 1883.", "Pangeran Diponegoro dibebaskan dari Manado dan kembali ke Yogyakarta pada 1833.")
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("3_tt")
+kalimat = "Pada 2020, Belanda mengembalikan keris milik Pangeran Diponegoro kepada Indonesia."
+kata_kunci = "keris"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("3_tt")
+kalimat = "Pangeran Diponegoro adalah putra Sultan Hamengkubuwana III."
+kata_kunci = "Hamengkubuwana III"
+
+[resource]
+script = ExtResource("1_karya")
+id = &"diponegoro"
+tipe = 1
+judul = "Pangeran Diponegoro"
+era = "Perang Jawa, masa kolonial"
+teks_label = "Lukisan ini menggambarkan Pangeran Diponegoro, pemimpin Perang Jawa melawan pemerintah kolonial Belanda. Perang dimulai dari Tegalrejo pada [b]1825[/b]. Jenderal De Kock menangkapnya di Magelang pada [b]1830[/b]. Ia lalu diasingkan ke Manado dan dipindahkan ke Makassar pada [b]1833[/b]. Namanya dikenang sebagai pahlawan nasional yang gigih mempertahankan tanah Jawa. Kisah perjuangannya sering diceritakan kembali kepada generasi muda."
+fakta = Array[ExtResource("2_fakta")]([SubResource("Resource_f1"), SubResource("Resource_f2"), SubResource("Resource_f3")])
+tak_terbukti = Array[ExtResource("3_tt")]([SubResource("Resource_t1"), SubResource("Resource_t2")])
