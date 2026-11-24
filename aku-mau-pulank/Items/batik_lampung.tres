@@ -6,8 +6,10 @@
 [resource]
 script = ExtResource("1")
 id = &"batik_lampung"
-display_name = "Batik Lampung"
+display_name = "Batik Lampung (Kapal)"
+region = &"lampung"
+region_name = "Lampung"
 icon = ExtResource("1_ey5e4")
 large_image = ExtResource("1_ey5e4")
 description = "Batik bermotif kapal khas Lampung, melambangkan pelayaran dan kekayaan budaya daerah ini."
-hint = "Carilah batik yang menggambarkan kapal berlayar di atas ombak."
+hint = "Batik bermotif kapal berlayar di atas ombak."

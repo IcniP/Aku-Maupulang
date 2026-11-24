@@ -214,3 +214,12 @@ position = Vector2(-81, -58)
 
 [node name="Lemari3" parent="Y-Sort" unique_id=1692806489 instance=ExtResource("6_thj8p")]
 position = Vector2(-62, -58)
+
+[node name="Lemari4" parent="Y-Sort" unique_id=1942806490 instance=ExtResource("6_thj8p")]
+position = Vector2(-43, -58)
+
+[node name="Lemari5" parent="Y-Sort" unique_id=1942806491 instance=ExtResource("6_thj8p")]
+position = Vector2(-24, -58)
+
+[node name="Lemari6" parent="Y-Sort" unique_id=1942806492 instance=ExtResource("6_thj8p")]
+position = Vector2(-5, -58)

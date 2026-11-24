@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" uid="uid://dfgdp738qmigp" path="res://Code/ItemData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Items/batik_cirebon_singa_barong.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"batik_cirebon_singa_barong"
+display_name = "Batik Singa Barong"
+region = &"cirebon"
+region_name = "Cirebon"
+icon = ExtResource("2")
+large_image = ExtResource("2")
+description = "Motif makhluk mitologi bersayap khas Cirebon, terinspirasi dari kereta kebesaran Keraton Kasepuhan."
+hint = "Batik bermotif makhluk mitologi bersayap khas Keraton Kasepuhan."

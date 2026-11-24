@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" uid="uid://dfgdp738qmigp" path="res://Code/ItemData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Items/batik_lampung_gajah.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"batik_lampung_gajah"
+display_name = "Batik Lampung (Gajah)"
+region = &"lampung"
+region_name = "Lampung"
+icon = ExtResource("2")
+large_image = ExtResource("2")
+description = "Batik bermotif gajah khas Lampung, terinspirasi dari gajah Sumatera di Way Kambas."
+hint = "Batik bermotif gajah khas Way Kambas."

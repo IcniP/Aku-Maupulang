@@ -18,17 +18,20 @@ class Slot extends Button:
 
 class DropZone extends Button:
 	var table
+	var slot_index := 0
 	func _can_drop_data(_at: Vector2, data: Variant) -> bool:
-		return table != null and table.placed == null and data is ItemData
+		return table != null and table.can_place_at(slot_index) and data is ItemData
 	func _drop_data(_at: Vector2, data: Variant) -> void:
-		table.try_place(data)
+		table.try_place(data, slot_index)
 
 var hud_slots: Array[Button] = []
 var bag_slots: Array[Slot] = []
 var panel: PanelContainer
 var table_box: VBoxContainer
 var hint_label: Label
-var drop_zone: DropZone
+var table_status_label: Label
+var drop_row: HBoxContainer
+var drop_zones: Array[DropZone] = []
 var detail_image: TextureRect
 var detail_name: Label
 var detail_desc: Label
@@ -68,12 +71,12 @@ func _ready() -> void:
 	hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint_label.custom_minimum_size.x = 520
 	table_box.add_child(hint_label)
-	drop_zone = DropZone.new()
-	drop_zone.custom_minimum_size = Vector2(96, 96)
-	drop_zone.expand_icon = true
-	drop_zone.focus_mode = Control.FOCUS_NONE
-	drop_zone.pressed.connect(func(): if table: table.take_back())
-	table_box.add_child(drop_zone)
+	table_status_label = Label.new()
+	table_box.add_child(table_status_label)
+	drop_row = HBoxContainer.new()
+	drop_row.add_theme_constant_override("separation", 12)
+	table_box.add_child(drop_row)
+	_ensure_drop_zones(2)
 
 	var body := HBoxContainer.new()
 	root.add_child(body)
@@ -115,6 +118,21 @@ func _ready() -> void:
 	Inventory.changed.connect(_refresh)
 	_refresh()
 
+func _ensure_drop_zones(count: int) -> void:
+	while drop_zones.size() < count:
+		var idx := drop_zones.size()
+		var dz := DropZone.new()
+		dz.slot_index = idx
+		dz.custom_minimum_size = Vector2(132, 96)
+		dz.expand_icon = true
+		dz.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		dz.focus_mode = Control.FOCUS_NONE
+		dz.pressed.connect(func(): if table: table.take_back(idx))
+		drop_row.add_child(dz)
+		drop_zones.append(dz)
+	for i in drop_zones.size():
+		drop_zones[i].visible = i < count
+
 func _style_slot(b: Button, i: int, size: int) -> void:
 	b.custom_minimum_size = Vector2(size, size)
 	b.toggle_mode = true
@@ -139,7 +157,8 @@ func open_backpack(t = null) -> void:
 	table = t
 	table_box.visible = t != null
 	if t:
-		hint_label.text = "Petunjuk: " + t.hint_text()
+		hint_label.text = "Petunjuk:\n" + t.hint_text()
+		_ensure_drop_zones(t.slot_count())
 	panel.visible = true
 	get_tree().paused = true
 	_refresh()
@@ -170,6 +189,17 @@ func _refresh() -> void:
 	detail_name.text = item.display_name if item else "Pilih item"
 	detail_desc.text = item.description if item else ""
 	if table:
-		drop_zone.table = table
-		drop_zone.icon = table.placed.icon if table.placed else null
-		drop_zone.text = "" if table.placed else "Seret item ke sini"
+		var total: int = table.slot_count()
+		_ensure_drop_zones(total)
+		for i in total:
+			var dz := drop_zones[i]
+			dz.table = table
+			var placed_item: ItemData = table.placed_at(i)
+			dz.icon = placed_item.icon if placed_item else null
+			dz.text = "" if placed_item else "Batik %d\nSeret ke sini" % (i + 1)
+			dz.disabled = table.solved
+			dz.tooltip_text = ("%s (klik untuk ambil kembali)" % placed_item.display_name) if (placed_item and not table.solved) else ""
+		if table.solved:
+			table_status_label.text = "Selesai! Kedua batik dari daerah yang tepat telah dimasukkan."
+		else:
+			table_status_label.text = "Submission: %d / %d  (klik slot terisi untuk ambil kembali)" % [table.placed_count(), total]
