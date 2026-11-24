@@ -31,3 +31,9 @@ func select(index: int) -> void:
 
 func selected_item() -> ItemData:
 	return items[selected]
+
+func clear() -> void:
+	for i in MAX_ITEMS:
+		items[i] = null
+	selected = 0
+	changed.emit()

@@ -122,17 +122,7 @@ func _on_level_selesai() -> void:
 	if _keluar_aktif:
 		return
 	_keluar_aktif = true
-	var pemicu := Area2D.new()
-	pemicu.name = "PemicuKeluar"
-	pemicu.collision_layer = 0
-	pemicu.collision_mask = 1   # layer pemain
-	pemicu.position = posisi_pintu
-	var bentuk := CollisionShape2D.new()
-	var kotak := RectangleShape2D.new()
-	kotak.size = Vector2(28, 28)
-	bentuk.shape = kotak
-	pemicu.add_child(bentuk)
-	pemicu.body_entered.connect(_on_masuk_pintu)
+	var pemicu := PintuKeluar.buat_pemicu_keluar(posisi_pintu, "LANJUT -> Level 4", _on_masuk_pintu)
 	add_child(pemicu)
 
 func _on_masuk_pintu(body: Node2D) -> void:

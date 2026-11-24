@@ -1,7 +1,11 @@
 extends Node2D
 
+signal level_selesai
+
 const REQUIRED_PER_REGION := 2
 
+@export var next_scene: PackedScene = preload("res://Scene/level2.tscn")
+@export var posisi_pintu: Vector2 = Vector2(27, -56)
 @export var pool: Array[ItemData] = [
 	preload("res://Items/batik_lampung.tres"),
 	preload("res://Items/batik_lampung_gajah.tres"),
@@ -10,6 +14,12 @@ const REQUIRED_PER_REGION := 2
 	preload("res://Items/batik_mega_mendung.tres"),
 	preload("res://Items/batik_cirebon_singa_barong.tres"),
 ]
+
+var pintu: Node2D
+var _keluar_aktif := false
+var _jeda_toast := false
+
+@onready var _ysort: Node2D = $"Y-Sort"
 
 func _ready() -> void:
 	var by_region := {}
@@ -33,8 +43,12 @@ func _ready() -> void:
 	for i in REQUIRED_PER_REGION:
 		required_items.append(region_items[i])
 
+	pintu = PintuKeluar.buat_pintu_terkunci(posisi_pintu, "PINTU - Level 2")
+	_ysort.add_child(pintu)
+
 	for m in get_tree().get_nodes_in_group("meja"):
 		m.set_required(required_items)
+		m.puzzle_solved.connect(_on_puzzle_solved)
 
 	var boxes := get_tree().get_nodes_in_group("lemari")
 	if boxes.size() < required_items.size():
@@ -50,3 +64,29 @@ func _ready() -> void:
 	boxes.shuffle()
 	for n in boxes.size():
 		boxes[n].set_item(items[n] if n < items.size() else null)
+
+func _on_puzzle_solved() -> void:
+	if _keluar_aktif:
+		return
+	_keluar_aktif = true
+	if pintu != null:
+		pintu.get_node("Pintu/CollisionShape2D").set_deferred("disabled", true)
+		pintu.hide()
+	level_selesai.emit()
+	var pemicu := PintuKeluar.buat_pemicu_keluar(posisi_pintu, "LANJUT -> Level 2", _on_masuk_pintu)
+	add_child(pemicu)
+
+func _on_masuk_pintu(body: Node2D) -> void:
+	if not (body is Player):
+		return
+	pindah_level()
+
+func pindah_level() -> void:
+	if next_scene == null:
+		if not _jeda_toast:
+			_jeda_toast = true
+			InventoryUI.show_message("Level berikutnya belum tersedia")
+			get_tree().create_timer(2.5).timeout.connect(func() -> void: _jeda_toast = false)
+		return
+	Inventory.clear()
+	get_tree().change_scene_to_packed.call_deferred(next_scene)

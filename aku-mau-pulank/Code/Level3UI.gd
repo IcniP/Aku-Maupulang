@@ -6,11 +6,12 @@ extends CanvasLayer
 
 signal closed
 
-const LEBAR_PANEL := 520
+const LEBAR_PANEL := 540
 const AKSI_CATATAN := "catatan"
 
 var total_karya := 0   # diisi manager, untuk penghitung "karya diperiksa"
 
+var _backdrop: ColorRect
 var _aktif: Control
 var _panel_label: PanelContainer
 var _teks_label: RichTextLabel
@@ -27,9 +28,12 @@ var _catatan: Array[Level3Generator.Kertas] = []
 var _dibaca := {}
 
 func _ready() -> void:
+	layer = 50
 	process_mode = Node.PROCESS_MODE_ALWAYS   # tetap jalan saat game di-pause
 	add_to_group("level3_ui")
 	_daftarkan_aksi()
+	_backdrop = UITheme.make_backdrop()
+	add_child(_backdrop)
 	_bangun_label()
 	_bangun_kode()
 	_bangun_catatan()
@@ -50,12 +54,7 @@ func _panel_putih() -> PanelContainer:
 	p.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	p.grow_vertical = Control.GROW_DIRECTION_BOTH
 	p.visible = false
-	var gaya := StyleBoxFlat.new()
-	gaya.bg_color = Color.WHITE
-	gaya.set_border_width_all(2)
-	gaya.border_color = Color.BLACK
-	gaya.set_content_margin_all(16)
-	p.add_theme_stylebox_override("panel", gaya)
+	UITheme.style_parchment_panel(p, 24, 20)
 	add_child(p)
 	return p
 
@@ -65,76 +64,105 @@ func _teks_hitam() -> RichTextLabel:
 	r.fit_content = true
 	r.scroll_active = false
 	r.custom_minimum_size = Vector2(LEBAR_PANEL, 0)
-	r.add_theme_color_override("default_color", Color.BLACK)
+	r.add_theme_color_override("default_color", UITheme.TEXT_DARK)
 	return r
 
-func _label_hitam(teks: String, ukuran: int = 16) -> Label:
+func _label_hitam(teks: String, ukuran: int = 15) -> Label:
 	var l := Label.new()
 	l.text = teks
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x = LEBAR_PANEL
 	l.add_theme_font_size_override("font_size", ukuran)
-	l.add_theme_color_override("font_color", Color.BLACK)
+	l.add_theme_color_override("font_color", UITheme.TEXT_DARK)
 	return l
 
 func _bangun_label() -> void:
 	_panel_label = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_label.add_child(kolom)
+
+	var kartu := PanelContainer.new()
+	UITheme.style_inner_box(kartu, 14, false)
+	kolom.add_child(kartu)
 	_teks_label = _teks_hitam()
-	kolom.add_child(_teks_label)
+	kartu.add_child(_teks_label)
+
 	_tombol_kertas = Button.new()
 	_tombol_kertas.text = "Ambil kertas terselip"
-	_tombol_kertas.focus_mode = Control.FOCUS_NONE
+	UITheme.style_button(_tombol_kertas, "primary")
 	_tombol_kertas.pressed.connect(_ambil_terselip)
 	kolom.add_child(_tombol_kertas)
+
 	var tutup_btn := Button.new()
 	tutup_btn.text = "Tutup"
-	tutup_btn.focus_mode = Control.FOCUS_NONE
+	UITheme.style_button(tutup_btn, "secondary")
 	tutup_btn.pressed.connect(tutup)
 	kolom.add_child(tutup_btn)
 
 func _bangun_kode() -> void:
 	_panel_kode = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_kode.add_child(kolom)
-	kolom.add_child(_label_hitam("Panel Kode Pintu", 22))
+
+	kolom.add_child(UITheme.make_title("Panel Kode Pintu", 22, false))
+	kolom.add_child(UITheme.make_divider(false))
 	_isi_kode = _label_hitam("")
 	kolom.add_child(_isi_kode)
 	_edit_kode = LineEdit.new()
 	_edit_kode.max_length = Level3Data.CODE_LENGTH
 	_edit_kode.placeholder_text = "%d angka" % Level3Data.CODE_LENGTH
 	_edit_kode.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_edit_kode.custom_minimum_size.y = 52
 	_edit_kode.add_theme_font_size_override("font_size", 28)
 	_edit_kode.text_changed.connect(_saring_angka)
 	_edit_kode.text_submitted.connect(func(_t: String) -> void: _kirim_kode())
 	kolom.add_child(_edit_kode)
 	_status_kode = _label_hitam("")
+	_status_kode.add_theme_color_override("font_color", UITheme.ACCENT_DANGER)
 	kolom.add_child(_status_kode)
+
 	var baris := HBoxContainer.new()
+	baris.add_theme_constant_override("separation", 10)
 	kolom.add_child(baris)
 	var buka_btn := Button.new()
 	buka_btn.text = "Buka"
-	buka_btn.focus_mode = Control.FOCUS_NONE
 	buka_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	UITheme.style_button(buka_btn, "primary")
 	buka_btn.pressed.connect(_kirim_kode)
 	baris.add_child(buka_btn)
 	var tutup_btn := Button.new()
 	tutup_btn.text = "Tutup"
-	tutup_btn.focus_mode = Control.FOCUS_NONE
+	UITheme.style_button(tutup_btn, "secondary")
 	tutup_btn.pressed.connect(tutup)
 	baris.add_child(tutup_btn)
 
 func _bangun_catatan() -> void:
 	_panel_catatan = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_catatan.add_child(kolom)
-	kolom.add_child(_label_hitam("Catatan  (N / Esc untuk menutup)", 22))
+
+	var header := HBoxContainer.new()
+	kolom.add_child(header)
+	var judul := UITheme.make_title("Catatan Petunjuk", 22, false)
+	judul.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(judul)
+	var hint := UITheme.make_body("N / Esc untuk menutup", 13, true, false)
+	hint.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	header.add_child(hint)
+	kolom.add_child(UITheme.make_divider(false))
+
+	var kartu := PanelContainer.new()
+	UITheme.style_inner_box(kartu, 14, false)
+	kolom.add_child(kartu)
 	_teks_catatan = _teks_hitam()
-	kolom.add_child(_teks_catatan)
+	kartu.add_child(_teks_catatan)
+
 	var tutup_btn := Button.new()
 	tutup_btn.text = "Tutup"
-	tutup_btn.focus_mode = Control.FOCUS_NONE
+	UITheme.style_button(tutup_btn, "secondary")
 	tutup_btn.pressed.connect(tutup)
 	kolom.add_child(tutup_btn)
 	_segarkan_catatan()
@@ -176,6 +204,7 @@ func jumlah_catatan() -> int:
 func tutup() -> void:
 	if _aktif == null:
 		return
+	_backdrop.visible = false
 	_aktif.visible = false
 	_aktif = null
 	_karya_aktif = null
@@ -192,6 +221,7 @@ func _tampilkan(panel: Control) -> void:
 	if _aktif != null:
 		_aktif.visible = false
 	_aktif = panel
+	_backdrop.visible = true
 	panel.visible = true
 	get_tree().paused = true
 

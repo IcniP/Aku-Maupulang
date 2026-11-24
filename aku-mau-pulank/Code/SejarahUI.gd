@@ -2,13 +2,10 @@ class_name SejarahUI
 extends CanvasLayer
 # UI Level 4 lewat kode (pola Level3UI/StoryUI): panel LABEL karya, panel MESIN (BENAR/SALAH/TIDAK ADA),
 # panel TUMPUKAN potongan (tombol N, read-only), dan panel CATATAN KATEGORI.
-# Satu file karena semuanya berbagi aturan: hanya satu panel terbuka, get_tree().paused saat terbuka,
-# ditutup dengan ui_cancel, dan satu signal `closed`.
-# Sengaja TIDAK memakai Level3UI: Level3UI mengikat tombol N ke Catatan Level 3 dan tipe KaryaPameran.
 
 signal closed
 
-const LEBAR_PANEL := 560
+const LEBAR_PANEL := 580
 const AKSI_TUMPUKAN := "tumpukan_potongan"   # tombol N, didaftarkan lewat kode (bukan project.godot)
 
 var logika: SejarahMesinLogika
@@ -16,6 +13,7 @@ var mesin_node: SejarahMesin
 var total_karya := 0
 var jeda_periksa := 1.2   # detik "Memeriksa..." (timer tetap jalan saat game di-pause)
 
+var _backdrop: ColorRect
 var _aktif: Control
 var _panel_label: PanelContainer
 var _teks_label: RichTextLabel
@@ -33,9 +31,12 @@ var _dibaca := {}
 var _memeriksa := false
 
 func _ready() -> void:
+	layer = 50
 	process_mode = Node.PROCESS_MODE_ALWAYS   # tetap jalan saat game di-pause
 	add_to_group("sejarah_ui")
 	_daftarkan_aksi()
+	_backdrop = UITheme.make_backdrop()
+	add_child(_backdrop)
 	_bangun_label()
 	_bangun_mesin()
 	_bangun_tumpukan()
@@ -57,12 +58,7 @@ func _panel_putih() -> PanelContainer:
 	p.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	p.grow_vertical = Control.GROW_DIRECTION_BOTH
 	p.visible = false
-	var gaya := StyleBoxFlat.new()
-	gaya.bg_color = Color.WHITE
-	gaya.set_border_width_all(2)
-	gaya.border_color = Color.BLACK
-	gaya.set_content_margin_all(16)
-	p.add_theme_stylebox_override("panel", gaya)
+	UITheme.style_parchment_panel(p, 24, 20)
 	add_child(p)
 	return p
 
@@ -72,78 +68,120 @@ func _teks_hitam(tinggi_min: float = 0.0) -> RichTextLabel:
 	r.fit_content = true
 	r.scroll_active = false
 	r.custom_minimum_size = Vector2(LEBAR_PANEL, tinggi_min)
-	r.add_theme_color_override("default_color", Color.BLACK)
+	r.add_theme_color_override("default_color", UITheme.TEXT_DARK)
 	return r
 
-func _label_hitam(teks: String, ukuran: int = 16) -> Label:
+func _label_hitam(teks: String, ukuran: int = 15) -> Label:
 	var l := Label.new()
 	l.text = teks
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x = LEBAR_PANEL
 	l.add_theme_font_size_override("font_size", ukuran)
-	l.add_theme_color_override("font_color", Color.BLACK)
+	l.add_theme_color_override("font_color", UITheme.TEXT_DARK)
 	return l
 
-func _tombol(teks: String, aksi: Callable) -> Button:
+func _tombol(teks: String, aksi: Callable, variant: String = "secondary") -> Button:
 	var b := Button.new()
 	b.text = teks
-	b.focus_mode = Control.FOCUS_NONE
+	UITheme.style_button(b, variant)
 	b.pressed.connect(aksi)
 	return b
 
 func _bangun_label() -> void:
 	_panel_label = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_label.add_child(kolom)
+	var kartu := PanelContainer.new()
+	UITheme.style_inner_box(kartu, 14, false)
+	kolom.add_child(kartu)
 	_teks_label = _teks_hitam()
-	kolom.add_child(_teks_label)
-	kolom.add_child(_tombol("Tutup", tutup))
+	kartu.add_child(_teks_label)
+	kolom.add_child(_tombol("Tutup", tutup, "secondary"))
 
 func _bangun_mesin() -> void:
 	_panel_mesin = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 10)
 	_panel_mesin.add_child(kolom)
-	_judul_mesin = _label_hitam("MESIN  BENAR / SALAH / TIDAK ADA", 22)
-	kolom.add_child(_judul_mesin)
-	_hitung_mesin = _label_hitam("")
-	kolom.add_child(_hitung_mesin)
+
+	var header := HBoxContainer.new()
+	kolom.add_child(header)
+	_judul_mesin = UITheme.make_title("Mesin Klasifikasi Sejarah", 21, false)
+	_judul_mesin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(_judul_mesin)
+	_hitung_mesin = UITheme.make_body("", 14, true, false)
+	_hitung_mesin.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	header.add_child(_hitung_mesin)
+	kolom.add_child(UITheme.make_divider(false))
+
 	_daftar = ItemList.new()
-	_daftar.custom_minimum_size = Vector2(LEBAR_PANEL, 170)
+	_daftar.custom_minimum_size = Vector2(LEBAR_PANEL, 165)
 	_daftar.max_text_lines = 2
 	_daftar.focus_mode = Control.FOCUS_NONE
 	_daftar.item_selected.connect(_saat_dipilih)
 	kolom.add_child(_daftar)
-	_teks_pilihan = _teks_hitam(64)
-	kolom.add_child(_teks_pilihan)
+
+	var pilihan_card := PanelContainer.new()
+	UITheme.style_inner_box(pilihan_card, 12, false)
+	kolom.add_child(pilihan_card)
+	_teks_pilihan = _teks_hitam(54)
+	pilihan_card.add_child(_teks_pilihan)
+
 	var baris := HBoxContainer.new()
+	baris.add_theme_constant_override("separation", 10)
 	kolom.add_child(baris)
+	var varian := ["success", "danger", "primary"]
 	for k in 3:
-		var b := _tombol(SejarahData.nama_kategori(k), _pilih_kategori.bind(k))
+		var b := _tombol(SejarahData.nama_kategori(k), _pilih_kategori.bind(k), varian[k])
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		baris.add_child(b)
 		_tombol_kategori.append(b)
+
 	_status_mesin = _label_hitam("")
+	_status_mesin.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_status_mesin.add_theme_color_override("font_color", UITheme.ACCENT_PRIMARY)
 	kolom.add_child(_status_mesin)
-	kolom.add_child(_tombol("Tutup", tutup))
+	kolom.add_child(_tombol("Tutup", tutup, "secondary"))
 
 func _bangun_tumpukan() -> void:
 	_panel_tumpukan = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_tumpukan.add_child(kolom)
-	kolom.add_child(_label_hitam("Tumpukan potongan  (N / Esc untuk menutup)", 22))
+
+	var header := HBoxContainer.new()
+	kolom.add_child(header)
+	var judul := UITheme.make_title("Tumpukan Potongan", 22, false)
+	judul.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(judul)
+	var hint := UITheme.make_body("N / Esc untuk menutup", 13, true, false)
+	hint.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	header.add_child(hint)
+	kolom.add_child(UITheme.make_divider(false))
+
+	var kartu := PanelContainer.new()
+	UITheme.style_inner_box(kartu, 14, false)
+	kolom.add_child(kartu)
 	_teks_tumpukan = _teks_hitam()
-	kolom.add_child(_teks_tumpukan)
-	kolom.add_child(_tombol("Tutup", tutup))
+	kartu.add_child(_teks_tumpukan)
+	kolom.add_child(_tombol("Tutup", tutup, "secondary"))
 
 func _bangun_kategori() -> void:
 	_panel_kategori = _panel_putih()
 	var kolom := VBoxContainer.new()
+	kolom.add_theme_constant_override("separation", 12)
 	_panel_kategori.add_child(kolom)
-	kolom.add_child(_label_hitam("Catatan Kategori", 22))
+	var header := VBoxContainer.new()
+	header.add_theme_constant_override("separation", 8)
+	header.add_child(UITheme.make_title("Catatan Kategori", 22, false))
+	header.add_child(UITheme.make_divider(false))
+	kolom.add_child(header)
 	var teks := _teks_hitam()
+	teks.add_theme_stylebox_override("normal", UITheme.make_box(UITheme.CARD_INNER, UITheme.BORDER_SOFT, 1, 10, 14, 14))
 	teks.text = SejarahData.TEKS_KATEGORI
 	kolom.add_child(teks)
-	kolom.add_child(_tombol("Tutup", tutup))
+	kolom.add_child(_tombol("Tutup", tutup, "secondary"))
 
 # ---------------------------------------------------------------- API untuk objek
 
@@ -170,6 +208,7 @@ func buka_kategori() -> void:
 func tutup() -> void:
 	if _aktif == null:
 		return
+	_backdrop.visible = false
 	_aktif.visible = false
 	_aktif = null
 	get_tree().paused = false
@@ -187,6 +226,7 @@ func _tampilkan(panel: Control) -> void:
 	if _aktif != null:
 		_aktif.visible = false
 	_aktif = panel
+	_backdrop.visible = true
 	panel.visible = true
 	get_tree().paused = true
 

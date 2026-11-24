@@ -20,6 +20,7 @@ func try_answer(text: String) -> bool:
 		return false
 	is_open = true
 	is_interactable = false
+	get_node("CollisionShape2D").set_deferred("disabled", true)
 	get_parent().get_node("Pintu/CollisionShape2D").set_deferred("disabled", true)
 	get_parent().hide()
 	InventoryUI.show_message("Pintu terbuka!")
