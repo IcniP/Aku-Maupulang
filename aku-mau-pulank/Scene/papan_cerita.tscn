@@ -8,11 +8,43 @@ size = Vector2(16, 6)
 [sub_resource type="CircleShape2D" id="range"]
 radius = 24.0
 
+[sub_resource type="LabelSettings" id="label_set"]
+font_size = 6
+font_color = Color(0.98, 0.94, 0.85, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="PapanCerita" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.45, 0.3, 0.15, 1)
-polygon = PackedVector2Array(-8, -14, 8, -14, 8, 0, -8, 0)
+color = Color(0.36, 0.23, 0.13, 1)
+polygon = PackedVector2Array(-10, -16, 10, -16, 10, 0, -10, 0)
+
+[node name="Kertas" type="Polygon2D" parent="."]
+color = Color(0.95, 0.91, 0.82, 1)
+polygon = PackedVector2Array(-8, -14, 8, -14, 8, -2, -8, -2)
+
+[node name="Garis1" type="Polygon2D" parent="."]
+color = Color(0.45, 0.35, 0.25, 0.8)
+polygon = PackedVector2Array(-6, -11, 6, -11, 6, -10, -6, -10)
+
+[node name="Garis2" type="Polygon2D" parent="."]
+color = Color(0.45, 0.35, 0.25, 0.8)
+polygon = PackedVector2Array(-6, -8, 4, -8, 4, -7, -6, -7)
+
+[node name="Garis3" type="Polygon2D" parent="."]
+color = Color(0.45, 0.35, 0.25, 0.8)
+polygon = PackedVector2Array(-6, -5, 5, -5, 5, -4, -6, -4)
+
+[node name="Label" type="Label" parent="."]
+z_index = 5
+offset_left = -22.0
+offset_top = -28.0
+offset_right = 22.0
+offset_bottom = -17.0
+text = "PAPAN"
+label_settings = SubResource("label_set")
+horizontal_alignment = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

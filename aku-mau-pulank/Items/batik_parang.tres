@@ -7,7 +7,9 @@
 script = ExtResource("1")
 id = &"batik_parang"
 display_name = "Batik Parang"
+region = &"yogyakarta"
+region_name = "Yogyakarta"
 icon = ExtResource("1_bjnrq")
 large_image = ExtResource("1_bjnrq")
-description = "Motif garis diagonal bersambung khas Jawa (Yogyakarta/Solo)."
-hint = "Carilah batik dengan garis diagonal bersambung."
+description = "Motif garis diagonal bersambung khas Yogyakarta, melambangkan keteguhan dan pantang menyerah."
+hint = "Batik dengan motif garis diagonal bersambung."

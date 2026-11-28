@@ -12,6 +12,7 @@ var data: ExhibitData
 var bbcode := ""                       # deskripsi dengan kata berwarna (dari generator)
 var kertas: Level3Generator.Kertas     # kertas terselip di karya ini (boleh null)
 var kertas_diambil := false
+var clue: Level3Generator.ClueKertas        # kertas clue terselip di lukisan ini (boleh null); bisa dibaca berulang
 var ui: Level3UI
 var _penanda: Label
 

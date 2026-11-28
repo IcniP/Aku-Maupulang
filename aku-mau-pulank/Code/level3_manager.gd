@@ -52,6 +52,7 @@ func _ready() -> void:
 		return
 	_bangun_ui()
 	_bangun_pintu_dan_panel()
+	_bangun_clue()
 	_bangun_karya()
 	_bangun_kertas()
 	_cetak_debug()
@@ -88,6 +89,7 @@ func _buat_konfigurasi(pool: Array[ExhibitData]) -> Level3Generator.Konfigurasi:
 	k.slot_lantai = Level3Generator.slot_grid(area_lantai, kolom_lantai, baris_lantai)
 	k.titik_kertas_lantai = Level3Generator.slot_grid(area_kertas_lantai, kolom_kertas_lantai, baris_kertas_lantai)
 	k.titik_pojok = PackedVector2Array(titik_pojok)
+	k.titik_dinding_samping = PackedVector2Array(Level3Data.TITIK_DINDING_SAMPING)
 	k.titik_terlarang = PackedVector2Array([_pemain.position, posisi_pintu, posisi_panel])
 	return k
 
@@ -104,11 +106,19 @@ func _bangun_pintu_dan_panel() -> void:
 	panel_kode.level_selesai.connect(_on_level_selesai)
 	_ysort.add_child(panel_kode)
 
+# Kertas CLUE: informasi yang tersebar (lantai, dinding atas/kiri/kanan). Yang terselip di lukisan dipasang di _bangun_karya.
+func _bangun_clue() -> void:
+	for c in hasil.clue:
+		if c.tipe != Level3Generator.TipeClue.TERSELIP:
+			_ysort.add_child(KertasClue.buat(c, ui))
+
 func _bangun_karya() -> void:
 	for k in hasil.karya:
 		var node := KaryaPameran.buat(k.data, k.posisi, k.bbcode, ui)
 		if k.indeks_kertas >= 0:
 			node.kertas = hasil.kertas[k.indeks_kertas]
+		if k.indeks_clue >= 0:
+			node.clue = hasil.clue[k.indeks_clue]
 		_ysort.add_child(node)
 
 func _bangun_kertas() -> void:
@@ -122,17 +132,7 @@ func _on_level_selesai() -> void:
 	if _keluar_aktif:
 		return
 	_keluar_aktif = true
-	var pemicu := Area2D.new()
-	pemicu.name = "PemicuKeluar"
-	pemicu.collision_layer = 0
-	pemicu.collision_mask = 1   # layer pemain
-	pemicu.position = posisi_pintu
-	var bentuk := CollisionShape2D.new()
-	var kotak := RectangleShape2D.new()
-	kotak.size = Vector2(28, 28)
-	bentuk.shape = kotak
-	pemicu.add_child(bentuk)
-	pemicu.body_entered.connect(_on_masuk_pintu)
+	var pemicu := PintuKeluar.buat_pemicu_keluar(posisi_pintu, "LANJUT -> Level 4", _on_masuk_pintu)
 	add_child(pemicu)
 
 func _on_masuk_pintu(body: Node2D) -> void:
@@ -160,3 +160,7 @@ func _cetak_debug() -> void:
 		var tipe: String = Level3Generator.TipeKertas.keys()[kr.tipe]
 		var lokasi := "karya " + String(hasil.karya[kr.indeks_karya].data.id) if kr.tipe == Level3Generator.TipeKertas.TERSELIP else str(kr.posisi)
 		print("[Level3] kertas '%s' (%s) di %s" % [kr.teks, tipe, lokasi])
+	for c in hasil.clue:
+		var tipe_clue: String = Level3Generator.TipeClue.keys()[c.tipe]
+		var lokasi_clue := "lukisan " + String(hasil.karya[c.indeks_karya].data.id) if c.tipe == Level3Generator.TipeClue.TERSELIP else str(c.posisi)
+		print("[Level3] kertas clue '%s' (%s) di %s" % [Level3Clue.judul_clue(c.indeks_teks), tipe_clue, lokasi_clue])

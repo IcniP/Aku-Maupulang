@@ -132,17 +132,7 @@ func _on_level_selesai() -> void:
 	if _keluar_aktif:
 		return
 	_keluar_aktif = true
-	var pemicu := Area2D.new()
-	pemicu.name = "PemicuKeluar"
-	pemicu.collision_layer = 0
-	pemicu.collision_mask = 1   # layer pemain
-	pemicu.position = posisi_pintu
-	var bentuk := CollisionShape2D.new()
-	var kotak := RectangleShape2D.new()
-	kotak.size = Vector2(28, 28)
-	bentuk.shape = kotak
-	pemicu.add_child(bentuk)
-	pemicu.body_entered.connect(_on_masuk_pintu)
+	var pemicu := PintuKeluar.buat_pemicu_keluar(posisi_pintu, "KELUAR -> Pulang!", _on_masuk_pintu)
 	add_child(pemicu)
 
 func _on_masuk_pintu(body: Node2D) -> void:
@@ -150,15 +140,18 @@ func _on_masuk_pintu(body: Node2D) -> void:
 		return
 	pindah_level()
 
-# Pindah ke next_scene; bila kosong cukup tampilkan toast (tidak crash).
+# Pindah ke next_scene; saat run aktif dari Main Menu selesaikan permainan (Victory).
 func pindah_level() -> void:
-	if next_scene == null:
-		if not _jeda_toast:
-			_jeda_toast = true
-			InventoryUI.show_message("Level berikutnya belum tersedia")
-			get_tree().create_timer(2.5).timeout.connect(func() -> void: _jeda_toast = false)
+	if next_scene != null:
+		get_tree().change_scene_to_packed.call_deferred(next_scene)
 		return
-	get_tree().change_scene_to_packed.call_deferred(next_scene)
+	if GameManager.is_run_active:
+		GameManager.complete_game()
+		return
+	if not _jeda_toast:
+		_jeda_toast = true
+		InventoryUI.show_message("Level berikutnya belum tersedia")
+		get_tree().create_timer(2.5).timeout.connect(func() -> void: _jeda_toast = false)
 
 # Kunci jawaban hanya dicetak pada build debug (Output editor).
 func _cetak_debug() -> void:

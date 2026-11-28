@@ -6,8 +6,10 @@
 [resource]
 script = ExtResource("1")
 id = &"batik_mega_mendung"
-display_name = "Batik Mendung"
+display_name = "Batik Mega Mendung"
+region = &"cirebon"
+region_name = "Cirebon"
 icon = ExtResource("1_4kvyp")
 large_image = ExtResource("1_4kvyp")
-description = "Motif awan bergelombang khas Cirebon, Jawa Barat."
-hint = "Carilah batik bermotif awan bergelombang ."
+description = "Motif awan bergelombang khas Cirebon, Jawa Barat, melambangkan keteduhan dan kesabaran."
+hint = "Batik bermotif awan bergelombang."
