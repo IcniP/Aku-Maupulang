@@ -15,7 +15,7 @@ const MAKS_PERCOBAAN := 20        # acak ulang bila validasi gagal
 const MIN_JARAK_KARYA := 40.0     # jarak minimal antar karya
 const MIN_JARAK_KERTAS := 28.0    # jarak minimal kertas ke karya
 const RADIUS_SLOT := 40.0         # slot dilarang dekat titik awal/pintu/panel
-const RADIUS_KERTAS := 34.0       # kertas dilarang dekat titik awal/pintu/panel
+const RADIUS_KERTAS := 46.0       # kertas (kode dan clue) dilarang dekat titik awal/pintu/panel, supaya tidak berebut tombol E dengan panel kode
 
 # --- Warna kata (nama -> hex, HURUF BESAR). Terbaca di atas putih. ---
 const WARNA := {
@@ -58,3 +58,27 @@ static func warna_dari_hex(hex: String) -> String:
 		if String(WARNA[k]).to_upper() == hex.to_upper():
 			return k
 	return ""
+
+# --- Kertas CLUE: kertas informasi yang tersebar di ruangan. Bisa dibaca berulang kali, TIDAK bisa diambil
+# (berbeda dengan kertas KODE yang masuk ke Catatan). Lokasi acak tiap permainan, tidak di dinding bawah. ---
+const JUMLAH_CLUE := 5
+# Titik kertas clue di dinding kiri dan kanan (tepat di tepi lantai; x = +-186 masih di dalam AREA_RUANG).
+const TITIK_DINDING_SAMPING: Array[Vector2] = [
+	Vector2(-186, -30), Vector2(-186, 30), Vector2(186, -30), Vector2(186, 30),
+]
+const DURASI_BANNER := 7.0                # detik banner misi tampil saat level mulai
+const TEKS_BANNER := "Hologram pameran ini error: beberapa kata di label berubah warna. Mungkin itu bukan kebetulan! Cari kertas petunjuk di lantai, di dinding atas, kiri, dan kanan, atau terselip di lukisan."
+
+# Isi tiap kertas clue (BBCode). Penanda {CONTOH} dan {KAMUS} diganti oleh Level3Clue.isi_clue().
+const CLUE_KERTAS := [
+	{"judul": "Catatan Teknisi Budi",
+	"isi": "Hologram expo error lagi! Kata-kata di label jadi warna-warni, dan kode pintu cadangan kucatat di kertas-kertas yang kusebar. Sayangnya aku lupa menaruhnya di mana. Tolong ya!\n\nKodenya 3 angka. Masukkan ke panel KODE di samping pintu.\n\n- Budi, teknisi shift malam"},
+	{"judul": "Cara Membaca Kertas Kode",
+	"isi": "Ada 3 kertas kode yang bisa diambil. Tiap kertas menyebut SATU WARNA untuk SATU DIGIT kode.\n\nContoh kertas:\n{CONTOH}\nArtinya: digit ke-1 kode = jumlah kata KUNING di SEMUA label karya."},
+	{"judul": "Cara Menghitung",
+	"isi": "1. Buka SEMUA 7 label karya (tekan E pada patung dan lukisan).\n2. Hitung hanya kata yang warnanya bukan hitam, sesuai warna di kertas kode.\n3. Jumlahkan dari semua label.\n\nTombol N membuka Catatan. Catatan mencatat hitungan tiap label yang sudah kamu buka, jadi kamu tidak perlu mengingatnya."},
+	{"judul": "Kamus Warna",
+	"isi": "Ada enam warna:\n{KAMUS}\n\nHati-hati: merah dan magenta mirip, biru dan cyan juga mirip. Satu kata hanya punya satu warna."},
+	{"judul": "Di Mana Kertas Kode?",
+	"isi": "Kertas kode bisa ada di sudut ruangan, tergeletak di lantai, atau terselip di label karya (buka labelnya, lalu tekan Ambil kertas terselip).\n\nKertas yang ini lain: tidak bisa diambil, tetapi boleh kamu baca lagi kapan saja."},
+]

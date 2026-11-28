@@ -5,6 +5,8 @@ extends RefCounted
 # Dipanggil level3_manager.gd dan Tools/level3_test.gd.
 
 enum TipeKertas { POJOK, LANTAI, TERSELIP }
+# Lokasi kertas CLUE (dinding bawah tidak dipakai karena sulit terlihat).
+enum TipeClue { LANTAI, DINDING_ATAS, DINDING_SAMPING, TERSELIP }
 
 # Masukan generator.
 class Konfigurasi extends RefCounted:
@@ -14,6 +16,8 @@ class Konfigurasi extends RefCounted:
 	var titik_pojok: PackedVector2Array = PackedVector2Array()
 	var titik_kertas_lantai: PackedVector2Array = PackedVector2Array()
 	var titik_terlarang: PackedVector2Array = PackedVector2Array()  # awal pemain, pintu, panel
+	var titik_dinding_samping: PackedVector2Array = PackedVector2Array()  # kertas clue di dinding kiri/kanan
+	var jumlah_clue: int = Level3Data.JUMLAH_CLUE
 	var radius_slot: float = Level3Data.RADIUS_SLOT
 	var radius_kertas: float = Level3Data.RADIUS_KERTAS
 	var area_ruang: Rect2 = Level3Data.AREA_RUANG
@@ -27,6 +31,7 @@ class Karya extends RefCounted:
 	var bbcode: String = ""                # deskripsi dengan kata berwarna
 	var jumlah_warna: Dictionary = {}      # hasil HITUNG ULANG dari bbcode
 	var indeks_kertas: int = -1            # kertas terselip di karya ini (-1 = tidak ada)
+	var indeks_clue: int = -1              # kertas clue terselip di karya ini (hanya lukisan; -1 = tidak ada)
 
 # Satu kertas petunjuk.
 class Kertas extends RefCounted:
@@ -44,6 +49,13 @@ class Kertas extends RefCounted:
 		var kanan := "_".repeat(Level3Data.CODE_LENGTH - 1 - posisi_angka)
 		return "%s[color=%s][b]%s[/b][/color]%s" % [kiri, hex, warna, kanan]
 
+# Satu kertas CLUE (informasi, bukan kode): bisa dibaca berulang, tidak bisa diambil.
+class ClueKertas extends RefCounted:
+	var indeks_teks: int = 0               # indeks ke Level3Data.CLUE_KERTAS
+	var tipe: int = TipeClue.LANTAI
+	var posisi: Vector2 = Vector2.ZERO
+	var indeks_karya: int = -1             # untuk TERSELIP (lukisan)
+
 # Hasil satu permainan.
 class Hasil extends RefCounted:
 	var seed_dipakai: int = 0
@@ -51,6 +63,7 @@ class Hasil extends RefCounted:
 	var percobaan: int = 0
 	var karya: Array[Level3Generator.Karya] = []
 	var kertas: Array[Level3Generator.Kertas] = []
+	var clue: Array[Level3Generator.ClueKertas] = []
 	var jumlah_warna: Dictionary = {}      # total per warna di semua label (hitung ulang)
 	var kode: Array[int] = []
 	var galat: PackedStringArray = PackedStringArray()
@@ -76,6 +89,7 @@ static func konfigurasi_standar(pool: Array[ExhibitData], allow_zero: bool = tru
 	k.slot_lantai = slot_grid(Level3Data.AREA_LANTAI, Level3Data.KOLOM_LANTAI, Level3Data.BARIS_LANTAI)
 	k.titik_kertas_lantai = slot_grid(Level3Data.AREA_KERTAS_LANTAI, Level3Data.KOLOM_KERTAS_LANTAI, Level3Data.BARIS_KERTAS_LANTAI)
 	k.titik_pojok = PackedVector2Array(Level3Data.TITIK_POJOK)
+	k.titik_dinding_samping = PackedVector2Array(Level3Data.TITIK_DINDING_SAMPING)
 	k.titik_terlarang = PackedVector2Array([Level3Data.POSISI_AWAL_PEMAIN, Level3Data.POSISI_PINTU, Level3Data.POSISI_PANEL])
 	return k
 
@@ -225,6 +239,12 @@ static func _coba(konf: Konfigurasi, nilai_seed: int) -> Hasil:
 	for k in h.kertas:
 		h.kode[k.posisi_angka] = int(h.jumlah_warna[k.warna])
 
+	# 4b) kertas clue (informasi) tersebar di lantai, dinding atas/kiri/kanan, atau terselip di lukisan
+	var galat_clue := _buat_clue(h, konf, rng)
+	if galat_clue != "":
+		h.galat.append(galat_clue)
+		return h
+
 	# 5) validasi
 	h.galat.append_array(validasi(konf, h))
 	return h
@@ -372,6 +392,74 @@ static func _buat_kertas(h: Hasil, konf: Konfigurasi, rng: RandomNumberGenerator
 		h.kertas.append(kr)
 	return ""
 
+# Kertas clue: lokasi acak per jenis tanpa menumpuk. Dinding atas memakai slot dinding yang tidak dipakai lukisan,
+# dinding kiri/kanan memakai titik samping, terselip hanya di lukisan yang belum menyimpan kertas kode.
+static func _buat_clue(h: Hasil, konf: Konfigurasi, rng: RandomNumberGenerator) -> String:
+	if konf.jumlah_clue > Level3Data.CLUE_KERTAS.size():
+		return "teks clue kurang (%d < %d)" % [Level3Data.CLUE_KERTAS.size(), konf.jumlah_clue]
+	var hindar: Array[Vector2] = []   # posisi karya dan kertas kode yang tidak boleh ditimpa
+	for k in h.karya:
+		hindar.append(k.posisi)
+	for kr in h.kertas:
+		if kr.tipe != TipeKertas.TERSELIP:
+			hindar.append(kr.posisi)
+	var lantai := _titik_kertas_layak(konf.titik_kertas_lantai, hindar, konf)
+	var samping := _titik_kertas_layak(konf.titik_dinding_samping, hindar, konf)
+	var atas: Array[Vector2] = []
+	for p in konf.slot_dinding:
+		var ok := true
+		for q in hindar:
+			if p.distance_to(q) < Level3Data.MIN_JARAK_KARYA and q.y < -100.0:
+				ok = false          # sudah ada lukisan di slot itu
+			elif p.distance_to(q) < Level3Data.MIN_JARAK_KERTAS:
+				ok = false          # terlalu dekat kertas kode
+		for q in konf.titik_terlarang:
+			if p.distance_to(q) < konf.radius_kertas:
+				ok = false
+		if ok:
+			atas.append(p)
+	var calon_lukisan: Array[int] = []
+	for i in h.karya.size():
+		if h.karya[i].data.tipe == ExhibitData.Tipe.LUKISAN and h.karya[i].indeks_kertas < 0:
+			calon_lukisan.append(i)
+	_acak(lantai, rng)
+	_acak(samping, rng)
+	_acak(atas, rng)
+	_acak(calon_lukisan, rng)
+	var urutan_teks: Array[int] = []
+	for i in konf.jumlah_clue:
+		urutan_teks.append(i)
+	_acak(urutan_teks, rng)
+	for i in konf.jumlah_clue:
+		var c := ClueKertas.new()
+		c.indeks_teks = urutan_teks[i]
+		var opsi: Array[int] = []
+		if not lantai.is_empty():
+			opsi.append(TipeClue.LANTAI)
+		if not atas.is_empty():
+			opsi.append(TipeClue.DINDING_ATAS)
+		if not samping.is_empty():
+			opsi.append(TipeClue.DINDING_SAMPING)
+		if not calon_lukisan.is_empty():
+			opsi.append(TipeClue.TERSELIP)
+		if opsi.is_empty():
+			return "tempat kertas clue habis"
+		c.tipe = opsi[rng.randi_range(0, opsi.size() - 1)]
+		match c.tipe:
+			TipeClue.LANTAI:
+				c.posisi = lantai.pop_back()
+			TipeClue.DINDING_ATAS:
+				c.posisi = atas.pop_back()
+			TipeClue.DINDING_SAMPING:
+				c.posisi = samping.pop_back()
+			_:
+				var ik: int = calon_lukisan.pop_back()
+				c.indeks_karya = ik
+				c.posisi = h.karya[ik].posisi
+				h.karya[ik].indeks_clue = h.clue.size()
+		h.clue.append(c)
+	return ""
+
 # Titik kertas yang layak: di dalam ruangan, tidak dekat karya, tidak dekat titik terlarang.
 static func _titik_kertas_layak(titik: PackedVector2Array, posisi_karya: Array[Vector2], konf: Konfigurasi) -> Array[Vector2]:
 	var out: Array[Vector2] = []
@@ -496,7 +584,72 @@ static func validasi(konf: Konfigurasi, h: Hasil) -> PackedStringArray:
 	for p in panjang:
 		if hitung_posisi[p] != 1:
 			g.append("posisi angka %d punya %d kertas" % [p, hitung_posisi[p]])
+	g.append_array(_validasi_clue(konf, h))
 	return g
+
+# Validasi kertas clue: jumlah, teks tidak kembar, lokasi sah per jenis, tidak menumpuk, bukan di dinding bawah.
+static func _validasi_clue(konf: Konfigurasi, h: Hasil) -> PackedStringArray:
+	var g := PackedStringArray()
+	if h.clue.size() != konf.jumlah_clue:
+		g.append("jumlah kertas clue %d != %d" % [h.clue.size(), konf.jumlah_clue])
+	var teks_dipakai := {}
+	var karya_terselip := {}
+	for i in h.clue.size():
+		var c := h.clue[i]
+		if c.indeks_teks < 0 or c.indeks_teks >= Level3Data.CLUE_KERTAS.size() or teks_dipakai.has(c.indeks_teks):
+			g.append("clue %d: teks tidak valid/kembar" % i)
+		teks_dipakai[c.indeks_teks] = true
+		match c.tipe:
+			TipeClue.TERSELIP:
+				if c.indeks_karya < 0 or c.indeks_karya >= h.karya.size():
+					g.append("clue %d terselip tanpa karya" % i)
+				else:
+					var kr := h.karya[c.indeks_karya]
+					if kr.data.tipe != ExhibitData.Tipe.LUKISAN:
+						g.append("clue %d terselip bukan di lukisan" % i)
+					if kr.indeks_kertas >= 0:
+						g.append("clue %d: lukisan itu sudah menyimpan kertas kode" % i)
+					if kr.indeks_clue != i or karya_terselip.has(c.indeks_karya):
+						g.append("clue %d: satu lukisan menyimpan lebih dari satu clue" % i)
+					karya_terselip[c.indeks_karya] = true
+				continue
+			TipeClue.LANTAI:
+				if not _titik_ada(konf.titik_kertas_lantai, c.posisi):
+					g.append("clue %d di lantai bukan titik sah" % i)
+			TipeClue.DINDING_ATAS:
+				if not _titik_ada(konf.slot_dinding, c.posisi):
+					g.append("clue %d di dinding atas bukan slot sah" % i)
+			TipeClue.DINDING_SAMPING:
+				if not _titik_ada(konf.titik_dinding_samping, c.posisi):
+					g.append("clue %d di dinding samping bukan titik sah" % i)
+			_:
+				g.append("clue %d: jenis lokasi tidak dikenal" % i)
+		if c.tipe != TipeClue.DINDING_ATAS and not konf.area_ruang.has_point(c.posisi):
+			g.append("clue %d di luar ruangan" % i)
+		if c.tipe == TipeClue.DINDING_ATAS and c.posisi.y > -100.0:
+			g.append("clue %d: dinding atas harus di garis dinding" % i)
+		if c.posisi.y > 70.0 and c.tipe != TipeClue.LANTAI:
+			g.append("clue %d berada di dinding bawah" % i)
+		for k in h.karya:
+			var jarak_min := Level3Data.MIN_JARAK_KARYA if c.tipe == TipeClue.DINDING_ATAS else Level3Data.MIN_JARAK_KERTAS
+			if c.posisi.distance_to(k.posisi) < jarak_min:
+				g.append("clue %d menimpa karya %s" % [i, k.data.id])
+		for kr in h.kertas:
+			if kr.tipe != TipeKertas.TERSELIP and c.posisi.distance_to(kr.posisi) < Level3Data.MIN_JARAK_KERTAS:
+				g.append("clue %d menimpa kertas kode" % i)
+		for q in konf.titik_terlarang:
+			if c.posisi.distance_to(q) < konf.radius_kertas:
+				g.append("clue %d dekat titik awal/pintu/panel" % i)
+		for j in range(i + 1, h.clue.size()):
+			if h.clue[j].tipe != TipeClue.TERSELIP and c.posisi.distance_to(h.clue[j].posisi) < Level3Data.MIN_JARAK_KERTAS:
+				g.append("clue %d dan %d berdekatan/menumpuk" % [i, j])
+	return g
+
+static func _titik_ada(daftar: PackedVector2Array, p: Vector2) -> bool:
+	for s in daftar:
+		if s.is_equal_approx(p):
+			return true
+	return false
 
 # Pastikan semua kata berwarna di satu label valid: huruf saja, >= 3 huruf.
 static func _cek_kata_berwarna(k: Karya) -> PackedStringArray:
